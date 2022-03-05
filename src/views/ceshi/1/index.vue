@@ -5,7 +5,7 @@
       <div class="grid-content bg-purple">
         <el-card class="box-card" shadow="never">
          <div class="text item">
-         <p>姓名:周鑫
+         <p>姓名:小明
          </p>
          </div>
         </el-card>
