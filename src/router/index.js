@@ -46,12 +46,12 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/index',
     children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
+      path: 'index',
+      name: '首页',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
@@ -60,107 +60,84 @@ export const constantRoutes = [
     component: Layout,
     redirect: '/example/table',
     name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
+    meta: { title: '考试中心', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '待参加的考试', icon: 'table' }
       },
       {
         path: 'tree',
         name: 'Tree',
         component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
+        meta: { title: '已结束的考试', icon: 'tree' }
       }
     ]
   },
 
   {
-    path: '/form',
+    path: '/grzx',
     component: Layout,
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
+    redirect: '/grzx/wdbj',
+    name: 'grzx',
     meta: {
-      title: 'Nested',
+      title: '个人中心',
       icon: 'nested'
     },
     children: [
       {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
+        path: 'wdbj',
+        component: () => import('@/views/nested/menu1/index'),
+        name: '我的班级',
+        meta: { title: '我的班级' }
       },
       {
-        path: 'menu2',
+        path: 'cjfx',
+        component: () => import('@/views/nested/menu1/index'),
+        name: '成绩分析',
+        meta: { title: '成绩分析' }
+      },
+      {
+        path: 'jbzl',
         component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
+        name: '基本资料',
+        meta: { title: '基本资料' }
       }
     ]
   },
 
   {
-    path: 'external-link',
+    path: '题库',
     component: Layout,
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
+        path: '/#',
+        meta: { title: '购买题库', icon: 'link' }
+      }
+    ]
+  }
+]
+
+export const asyncRoutes = [
+  {
+    path: '/ceshi',
+    component: Layout,
+    children: [
+      {
+        path: 'admin',
+        component: () => import('@/views/ceshi/1'),
+        meta: { title: 'admin', icon: 'el-icon-s-check', roles: ['admin'] }
+      },
+      {
+        path: 'zhu',
+        component: () => import('@/views/ceshi/2'),
+        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['zhu'] }
       }
     ]
   },
-
-  // 404 page must be placed at the end !!!
+  // 404 页面必须放置在最后一个页面
   { path: '*', redirect: '/404', hidden: true }
 ]
 
