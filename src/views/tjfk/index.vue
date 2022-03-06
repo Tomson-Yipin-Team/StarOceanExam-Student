@@ -8,11 +8,10 @@
       placeholder="请输入内容"
       style="width:610px"
     />
-    <br>
-
+    <br><br>
     <el-row :gutter="20">
       <el-col :span="12" :offset="10"><div class="grid-content bg-purple">
-        <el-button type="primary" @click="open2">成功</el-button></div></el-col>
+        <el-button type="primary" @click="open2">提交</el-button></div></el-col>
     </el-row>
   </el-card>
 </template>

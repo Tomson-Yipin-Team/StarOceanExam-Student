@@ -113,7 +113,7 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: '/#',
+        path: 'http://49.232.25.105/',
         meta: { title: '购买题库', icon: 'link' }
       }
     ]
@@ -123,14 +123,26 @@ export const constantRoutes = [
     path: '/tjfk',
     component: Layout,
     redirect: '/tjfk',
-    name: 'tjfk',
-    meta: { title: '提交反馈', icon: 'el-icon-s-help' },
     children: [
       {
         path: 'index',
         name: '提交反馈',
         component: () => import('@/views/tjfk/index'),
-        meta: { title: '提交反馈', icon: 'table' }
+        meta: { title: '提交反馈', icon: 'el-icon-chat-round' }
+      }
+    ]
+  },
+
+  {
+    path: '/lxwm',
+    component: Layout,
+    redirect: '/lxwm',
+    children: [
+      {
+        path: 'index',
+        name: '联系我们',
+        component: () => import('@/views/lxwm/index'),
+        meta: { title: '联系我们', icon: 'el-icon-headset' }
       }
     ]
   }
