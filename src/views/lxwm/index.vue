@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card-component" style="margin-left:8px;">
+  <el-card class="box-card-component" style="margin:10px;">
     <el-descriptions title="联系我们" column="1" style="font-size:17px">
       <el-descriptions-item label="手机"><el-tag size="small">18862985705</el-tag></el-descriptions-item>
       <el-descriptions-item label="QQ">

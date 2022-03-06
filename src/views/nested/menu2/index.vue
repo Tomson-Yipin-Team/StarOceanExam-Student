@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card-component" style="margin-left:8px;">
+  <el-card class="box-card-component" style="margin:8px;">
     <el-descriptions title="用户信息">
       <el-descriptions-item label="用户名">kooriookami</el-descriptions-item>
       <el-descriptions-item label="手机号">18100000000</el-descriptions-item>

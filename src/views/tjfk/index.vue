@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card-component" style="margin-left:8px;">
+  <el-card class="box-card-component" style="margin:10px;">
     <h2>反馈中心</h2>
     <el-input
       v-model="textarea"

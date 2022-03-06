@@ -1,5 +1,5 @@
 <template>
-  <el-card class="box-card-component" style="margin-left:8px;">
+  <el-card class="box-card-component" style="margin:10px;">
     <el-input
       v-model="textarea"
       type="textarea"
