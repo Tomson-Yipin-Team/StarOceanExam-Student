@@ -4,7 +4,7 @@
       v-model="textarea"
       type="textarea"
       :rows="10"
-      placeholder="请输入内容"
+      placeholder="请输入内容1"
       style="width:610px"
     />
     <br>
