@@ -72,18 +72,6 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      customColor: '#f56c6c',
-      dialogTableVisible: false,
-      dialogFormVisible: false,
-      formLabelWidth: '120px'
-    }
-  }
-}
-</script>
 <style>
 .el-progress__text {
   white-space: pre;
@@ -93,7 +81,9 @@ export default {
 export default {
   data() {
     return {
-      customColor: '#f56c6c',
+      dialogTableVisible: false,
+      dialogFormVisible: false,
+      formLabelWidth: '120px',
       customColors: [
           {color: '#f56c6c', percentage: 60},
           {color: '#e6a23c', percentage: 70},
