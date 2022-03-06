@@ -1,23 +1,23 @@
 <template>
-  <div class="app-container" direction=horizontal>
+  <div class="app-container" direction="horizontal">
     <el-card class="box-card" shadow="hover">
-    <div slot="header" class="clearfix">
-      <span>高等数学(一)</span>
-      <el-button style="float: right; padding: 3px 0" type="text">退出</el-button>
-  </div>
-  <div v-for="o in 1" :key="o" class="text item">
-    班级:软工211、软工212<br>软工213、软工214
-  </div>
-</el-card>
-  <el-card class="box-card" shadow="hover">
-  <div slot="header" class="clearfix">
-    <span>高等数学(一)</span>
-    <el-button style="float: right; padding: 3px 0" type="text">退出</el-button>
-  </div>
-  <div v-for="o in 1" :key="o" class="text item">
-    班级:软工211、软工212<br>软工213、软工214
-  </div>
-</el-card>
+      <div slot="header" class="clearfix">
+        <span>高等数学(一)</span>
+        <el-button style="float: right; padding: 3px 0" type="text">进入</el-button>
+      </div>
+      <div v-for="o in 1" :key="o" class="text item">
+        班级:软工211、软工212<br>软工213、软工214
+      </div>
+    </el-card>
+    <el-card class="box-card" shadow="hover">
+      <div slot="header" class="clearfix">
+        <span>高等数学(一)</span>
+        <el-button style="float: right; padding: 3px 0" type="text">进入</el-button>
+      </div>
+      <div v-for="o in 1" :key="o" class="text item">
+        班级:软工211、软工212<br>软工213、软工214
+      </div>
+    </el-card>
   </div>
 </template>
 <style>

@@ -117,6 +117,22 @@ export const constantRoutes = [
         meta: { title: '购买题库', icon: 'link' }
       }
     ]
+  },
+
+  {
+    path: '/tjfk',
+    component: Layout,
+    redirect: '/tjfk',
+    name: 'tjfk',
+    meta: { title: '提交反馈', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'index',
+        name: '提交反馈',
+        component: () => import('@/views/tjfk/index'),
+        meta: { title: '提交反馈', icon: 'table' }
+      }
+    ]
   }
 ]
 
@@ -128,7 +144,7 @@ export const asyncRoutes = [
       {
         path: 'admin',
         component: () => import('@/views/ceshi/1'),
-        meta: { title: 'admin', icon: 'el-icon-s-check', roles: ['admin'] }
+        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
       },
       {
         path: 'zhu',

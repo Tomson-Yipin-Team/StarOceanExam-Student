@@ -10,19 +10,19 @@
     >
       <el-table-column label="考试名称" width="360">
         <template slot-scope="scope">
-          <i class="el-icon-collection"></i>
+          <i class="el-icon-collection" />
           <span style="margin-left: 10px">{{ scope.row.address }}</span>
         </template>
       </el-table-column>
       <el-table-column label="参考人数" width="120">
         <template slot-scope="scope">
-          <i class="el-icon-user"></i>
+          <i class="el-icon-user" />
           <span style="margin-left: 10px">{{ scope.row.many }}</span>
         </template>
       </el-table-column>
       <el-table-column label="日期" width="180">
         <template slot-scope="scope">
-          <i class="el-icon-time"></i>
+          <i class="el-icon-time" />
           <span style="margin-left: 10px">{{ scope.row.date }}</span>
         </template>
       </el-table-column>
@@ -41,31 +41,30 @@
             size="mini"
             type="primary"
             @click="dialogTableVisible = true"
-            >成绩分析</el-button
-          >
+          >成绩分析</el-button>
           <!-- Table -->
           <el-dialog title="成绩分析" :visible.sync="dialogTableVisible">
-              <el-card class="box-card-component" style="margin-left:8px;">
-    <div style="position:relative;">
-      <pan-thumb :image="avatar" class="panThumb" />
-      <div style="padding-top:10px;" class="progress-item">
-        <span>选择题：</span>
-        <el-progress :percentage="70" />
-      </div>
-      <div class="progress-item">
-        <span>JavaScript</span>
-        <el-progress :percentage="18" />
-      </div>
-      <div class="progress-item">
-        <span>CSS</span>
-        <el-progress :percentage="12" />
-      </div>
-      <div class="progress-item">
-        <span>ESLint</span>
-        <el-progress :percentage="100" status="success" />
-      </div>
-    </div>
-  </el-card>
+            <el-card class="box-card-component" style="margin-left:8px;">
+              <div style="position:relative;">
+                <pan-thumb :image="avatar" class="panThumb" />
+                <div style="padding-top:10px;" class="progress-item">
+                  <span>选择题：</span>
+                  <el-progress :percentage="90" :color="customColors" />
+                </div>
+                <div class="progress-item">
+                  <span>填空题</span>
+                  <el-progress :percentage="65" :color="customColors" />
+                </div>
+                <div class="progress-item">
+                  <span>阅读</span>
+                  <el-progress :percentage="70" :color="customColors" />
+                </div>
+                <div class="progress-item">
+                  <span>作文</span>
+                  <el-progress :percentage="80" :color="customColors" />
+                </div>
+              </div>
+            </el-card>
           </el-dialog>
         </template>
       </el-table-column>
@@ -77,12 +76,13 @@
 export default {
   data() {
     return {
+      customColor: '#f56c6c',
       dialogTableVisible: false,
       dialogFormVisible: false,
-      formLabelWidth: "120px",
-    };
-  },
-};
+      formLabelWidth: '120px'
+    }
+  }
+}
 </script>
 <style>
 .el-progress__text {
@@ -93,6 +93,14 @@ export default {
 export default {
   data() {
     return {
+      customColor: '#f56c6c',
+      customColors: [
+          {color: '#f56c6c', percentage: 60},
+          {color: '#e6a23c', percentage: 70},
+          {color: '#5cb87a', percentage: 80},
+          {color: '#1989fa', percentage: 90},
+          {color: '#6f7ad3', percentage: 100}
+        ],
       tableData: [
         {
           date: "2021-07-02-08:00",
