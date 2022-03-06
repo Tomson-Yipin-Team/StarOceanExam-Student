@@ -95,7 +95,7 @@ export const constantRoutes = [
       },
       {
         path: 'cjfx',
-        component: () => import('@/views/nested/menu1/index'),
+        component: () => import('@/views/nested/menu1/menu1-1/index'),
         name: '成绩分析',
         meta: { title: '成绩分析' }
       },
