@@ -43,18 +43,7 @@ export const constantRoutes = [
     hidden: true
   },
 
-  {
-    path: '/exam',
-    component: Layout,
-    hidden: true,
-    redirect: '/index',
-    children: [{
-      path: 'index',
-      name: '考试',
-      component: () => import('@/views/ceshi/1/index'),
-      meta: { title: '考试', icon: 'dashboard' }
-    }]
-  },
+  
   {
     path: '/',
     component: Layout,
@@ -146,7 +135,19 @@ export const constantRoutes = [
         meta: { title: '联系我们', icon: 'el-icon-headset' }
       }
     ]
-  }
+  },
+  {
+    path: '/exam',
+    component: Layout,
+    hidden: true,
+    redirect: '/index',
+    children: [{
+      path: 'index',
+      name: '考试',
+      component: () => import('@/views/ceshi/1/index'),
+      meta: { title: '考试', icon: 'dashboard' }
+    }]
+  },
 ]
 
 export const asyncRoutes = [
