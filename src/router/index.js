@@ -107,31 +107,19 @@ export const constantRoutes = [
       }
     ]
   },
-
-  {
-    path: '题库',
-    component: Layout,
-    children: [
-      {
-        path: 'http://49.232.25.105/',
-        meta: { title: '购买题库', icon: 'link' }
-      }
-    ]
-  },
-
-  {
-    path: '/tjfk',
-    component: Layout,
-    redirect: '/tjfk',
-    children: [
-      {
-        path: 'index',
-        name: '提交反馈',
-        component: () => import('@/views/tjfk/index'),
-        meta: { title: '提交反馈', icon: 'el-icon-chat-round' }
-      }
-    ]
-  },
+  // {
+  //   path: '/tjfk',
+  //   component: Layout,
+  //   redirect: '/tjfk',
+  //   children: [
+  //     {
+  //       path: 'index',
+  //       name: '提交反馈',
+  //       component: () => import('@/views/tjfk/index'),
+  //       meta: { title: '提交反馈', icon: 'el-icon-chat-round' }
+  //     }
+  //   ]
+  // },
 
   {
     path: '/lxwm',
