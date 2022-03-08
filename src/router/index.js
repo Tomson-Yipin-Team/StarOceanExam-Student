@@ -44,6 +44,18 @@ export const constantRoutes = [
   },
 
   {
+    path: '/exam',
+    component: Layout,
+    hidden: true,
+    redirect: '/index',
+    children: [{
+      path: 'index',
+      name: '考试',
+      component: () => import('@/views/ceshi/1/index'),
+      meta: { title: '考试', icon: 'dashboard' }
+    }]
+  },
+  {
     path: '/',
     component: Layout,
     redirect: '/index',

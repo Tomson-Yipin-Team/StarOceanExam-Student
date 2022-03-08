@@ -92,6 +92,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.$store.dispatch('app/toggleSideBar')
+        this.$router.push({ name: '考试' })
         this.$message({
           type: 'success',
           message: '正在进入!'
