@@ -121,17 +121,6 @@ export const constantRoutes = [
   },
 
   {
-    path: '题库',
-    component: Layout,
-    children: [
-      {
-        path: 'http://49.232.25.105/',
-        meta: { title: '购买题库', icon: 'link' }
-      }
-    ]
-  },
-
-  {
     path: '/tjfk',
     component: Layout,
     redirect: '/tjfk',
@@ -168,7 +157,7 @@ export const asyncRoutes = [
       {
         path: 'admin',
         component: () => import('@/views/ceshi/1'),
-        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
+        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['zhu'] }
       },
       {
         path: 'zhu',
