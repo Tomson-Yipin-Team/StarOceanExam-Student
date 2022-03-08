@@ -43,7 +43,6 @@ export const constantRoutes = [
     hidden: true
   },
 
-  
   {
     path: '/',
     component: Layout,
@@ -147,7 +146,7 @@ export const constantRoutes = [
       component: () => import('@/views/ceshi/1/index'),
       meta: { title: '考试', icon: 'dashboard' }
     }]
-  },
+  }
 ]
 
 export const asyncRoutes = [
