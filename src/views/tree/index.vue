@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-table
-      :data="tableData"
+      :data="tableData1"
       style="width: 100%"
       element-loading-text="Loading"
       border
@@ -50,7 +50,7 @@
           <el-button
             size="mini"
             type="primary"
-            @click="handleEdit(scope.$index, scope.row)"
+            @click="handleEdit1(scope.$index, scope.row)"
           >查看成绩</el-button>
         </template>
       </el-table-column>
@@ -62,7 +62,7 @@
 export default {
   data() {
     return {
-      tableData: [{
+      tableData1: [{
         date: '2021-07-02-08:00',
         name: '已结束',
         many: '126',
@@ -90,7 +90,7 @@ export default {
     }
   },
   methods: {
-    handleEdit(index, row) {
+    handleEdit1(index, row) {
       this.$alert('该学科分数为:' + row.fraction, '', {
         confirmButtonText: '确定',
         callback: action => {
