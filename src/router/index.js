@@ -101,7 +101,7 @@ export const constantRoutes = [
       },
       {
         path: 'jbzl',
-        component: () => import('@/views/nested/menu2/index'),
+        component: () => import('@/views/nested/personal/index'),
         name: '基本资料',
         meta: { title: '基本资料' }
       }
