@@ -101,20 +101,9 @@ export const constantRoutes = [
       },
       {
         path: 'jbzl',
-        component: () => import('@/views/nested/menu2/index'),
+        component: () => import('@/views/nested/personal/index'),
         name: '基本资料',
         meta: { title: '基本资料' }
-      }
-    ]
-  },
-
-  {
-    path: '题库',
-    component: Layout,
-    children: [
-      {
-        path: 'http://49.232.25.105/',
-        meta: { title: '购买题库', icon: 'link' }
       }
     ]
   },
@@ -145,6 +134,18 @@ export const constantRoutes = [
         meta: { title: '联系我们', icon: 'el-icon-headset' }
       }
     ]
+  },
+  {
+    path: '/exam',
+    component: Layout,
+    hidden: true,
+    redirect: '/index',
+    children: [{
+      path: 'index',
+      name: '考试',
+      component: () => import('@/views/ceshi/1/index'),
+      meta: { title: '考试', icon: 'dashboard' }
+    }]
   }
 ]
 
@@ -156,7 +157,7 @@ export const asyncRoutes = [
       {
         path: 'admin',
         component: () => import('@/views/ceshi/1'),
-        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
+        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['zhu'] }
       },
       {
         path: 'zhu',

@@ -12,16 +12,17 @@
         <el-descriptions title="用户信息" column="2">
           <template slot="extra" />
           <el-descriptions-item label="头像"><el-avatar shape="square" src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" /></el-descriptions-item>
-          <el-descriptions-item label="用户名">1978804174</el-descriptions-item>
-          <el-descriptions-item label="学号">2130110485</el-descriptions-item>
-          <el-descriptions-item label="姓名">小明</el-descriptions-item>
-          <el-descriptions-item label="邮箱">1978804174@qq.com</el-descriptions-item>
-          <el-descriptions-item label="性别">男</el-descriptions-item>
-          <el-descriptions-item label="状态">
-            <el-tag size="small">在校</el-tag>
+          <el-descriptions-item label="用户名" style="margin-right:20px;">1978804174</el-descriptions-item>
+          <el-descriptions-item label="学号" style="margin-right:20px;">2130110485</el-descriptions-item>
+          <el-descriptions-item label="姓名" style="margin-right:20px;">小明</el-descriptions-item>
+          <el-descriptions-item label="邮箱" style="margin-right:20px;">1978804174@qq.com</el-descriptions-item>
+          <span style="margin-right:20px;" />
+          <el-descriptions-item label="性别" style="margin-right:20px;">男</el-descriptions-item>
+          <el-descriptions-item label="状态" style="margin-right:20px;">
+            <el-tag size="small" style="margin-right:20px;">在校</el-tag>
           </el-descriptions-item>
-          <el-descriptions-item label="学院">信息科学技术学院</el-descriptions-item>
-          <el-descriptions-item label="居住地">贵州省遵义市正安县</el-descriptions-item>
+          <el-descriptions-item label="学院" style="margin-right:20px;">信息科学技术学院</el-descriptions-item>
+          <el-descriptions-item label="居住地" style="margin-right:20px;">贵州省遵义市正安县</el-descriptions-item>
         </el-descriptions>
       </el-card>
     </el-row>
@@ -208,6 +209,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.$store.dispatch('app/toggleSideBar')
+        this.$router.push({ name: '考试' })
         this.$message({
           type: 'success',
           message: '正在进入!'
