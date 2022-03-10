@@ -183,7 +183,7 @@ $light_gray:#eee;
   // width: 100%;
   // background-color: $bg;
   // overflow: hidden;
-  background: url("E:/Web/gitlab/vue-exam-student-1/src/assets/Login_background/Back_ground.png");
+  background: url("../../assets/Login_background/Back_ground.png");
   width:100%;
   height:100%;
   position:fixed;
