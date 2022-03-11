@@ -93,11 +93,26 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$store.dispatch('app/toggleSideBar')
-        this.$router.push({ name: '考试' })
         this.$message({
           type: 'success',
           message: '正在进入!'
         })
+        const timejump = 1
+        if (!this.timer) {
+          this.count = timejump
+          this.show = false
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= timejump) {
+              this.count--
+            } else {
+              this.show = true
+              clearInterval(this.timer)
+              this.timer = null
+              // 跳转的页面写在此处
+              this.$router.push({ name: '考试' })
+            }
+          }, 1000)
+        }
       }).catch(() => {
         this.$message({
           type: 'info',
