@@ -2,7 +2,23 @@
   <el-card class="box-card-component" style="margin:10px;">
     <el-page-header content="南通大学高等数学(一)期末考试" @back="goBack" />
     <el-row :gutter="20" style="text-align: right;">
-      <el-button type="primary" @click="open3">工具箱</el-button><el-button type="primary" @click="open2">交卷</el-button>
+     
+     <el-button type="primary" @click="table = true" >工具箱</el-button><el-button type="primary" @click="open2">交卷</el-button>
+
+<el-drawer
+  title="考试工具箱"
+  :visible.sync="table"
+  direction="rtl"
+  size="20%">
+  <el-button @click="cancelForm">铅笔</el-button>
+   <br>
+  <el-button @click="cancelForm">荧光笔批注</el-button>
+  <br>
+  <el-button @click="cancelForm">文本框</el-button>
+  <br>
+  <el-button @click="cancelForm">时钟计时</el-button>
+</el-drawer>
+
     </el-row>
     <el-steps :space="200" :active="active" finish-status="success" style="margin-top:20PX">
       <el-step title="第1题" />
@@ -37,6 +53,7 @@
   </el-card>
 </template>
 <style scoped>
+
      .el-radio{
         display: block;
         line-height: 23px;
@@ -50,6 +67,8 @@
 export default {
   data() {
     return {
+      drawer: false,
+      table: false,
       A: '4',
       B: '1',
       C: '3',
@@ -58,7 +77,8 @@ export default {
       active: 0,
       radio: 0,
       textarea: ''
-    }
+
+    };
   },
   methods: {
     open2() {
@@ -248,8 +268,9 @@ export default {
         this.C = '8'
         this.D = '3'
       }
-    }
 
+    }
+      
   }
 }
 </script>
