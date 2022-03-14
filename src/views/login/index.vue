@@ -46,8 +46,8 @@
       <div class="icons">
         <span class="LoginIcon"><svg-icon icon-class="QQ" /></span>
         <span class="LoginIcon"><svg-icon icon-class="微信" /> </span>
-        <span id="register">注册账户</span>
-        <span id="help">联系我们</span>
+        <span id="register"><el-link @click="toRegister">注册账号</el-link></span>
+        <span id="help">忘记密码</span>
       </div>
     </el-form>
   </div>
@@ -121,6 +121,9 @@ export default {
           return false
         }
       })
+    },
+    toRegister(){
+      this.$router.push('/register')
     }
   }
 }
@@ -212,12 +215,23 @@ $light_gray:#eee;
       }
       #help{
         padding: 6px 5px 6px 15px;
-        font-size: 15px;
+        font-size: 14px;
         color: rgb(177, 173, 173);
         vertical-align: middle;
-      }
-      
+      }   
   }
+  //  .tips {
+  //   float: right;
+  //   font-size: 14px;
+  //   color: #fff;
+  //   margin-bottom: 10px;
+
+  //   span {
+  //     &:first-of-type {
+  //       margin-right: 16px;
+  //     }
+  //   }
+  // }
   .svg-container {
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
@@ -251,5 +265,19 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
+}
+</style>
+</style>
+
+<style scoped>
+/* 修改验证器样式 */
+ .el-form-item.is-error .el-input__inner {
+  border-color: #889aa4;
+}
+ .el-form-item.is-error .el-input__validateIcon {
+  color: #889aa4;
+}
+ .el-form-item__error {
+  color: #e6a23c;
 }
 </style>
