@@ -4,18 +4,6 @@
     <el-row :gutter="20" style="text-align: right;">
       <el-button type="primary" @click="open3">工具箱</el-button><el-button type="primary" @click="open2">交卷</el-button>
     </el-row>
-    <el-steps :space="200" :active="active" finish-status="success" style="margin-top:20PX">
-      <el-step title="第1题" />
-      <el-step title="第2题" />
-      <el-step title="第3题" />
-      <el-step title="第4题" />
-      <el-step title="第5题" />
-      <el-step title="第6题" />
-      <el-step title="第7题" />
-      <el-step title="第8题" />
-      <el-step title="第9题" />
-      <el-step title="第10题" />
-    </el-steps>
     <img height="120px" :src="src">
     <div>
       <el-radio-group v-model="radio">
