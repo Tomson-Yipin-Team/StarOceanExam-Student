@@ -227,7 +227,7 @@ export default {
               clearInterval(this.timer)
               this.timer = null
               // 跳转的页面写在此处
-              this.$router.push({ name: '考试' })
+              this.$router.push({ path: '/exam' })
             }
           }, 1000)
         }

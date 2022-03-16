@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container" >
+  <div class="login-container">
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
@@ -122,7 +122,7 @@ export default {
         }
       })
     },
-    toRegister(){
+    toRegister() {
       this.$router.push('/register')
     }
   }
@@ -218,7 +218,7 @@ $light_gray:#eee;
         font-size: 14px;
         color: rgb(177, 173, 173);
         vertical-align: middle;
-      }   
+      }
   }
   //  .tips {
   //   float: right;
@@ -267,8 +267,6 @@ $light_gray:#eee;
   }
 }
 </style>
-</style>
-
 <style scoped>
 /* 修改验证器样式 */
  .el-form-item.is-error .el-input__inner {

@@ -2,22 +2,23 @@
   <el-card class="box-card-component" style="margin:10px;">
     <el-page-header content="南通大学高等数学(一)期末考试" @back="goBack" />
     <el-row :gutter="20" style="text-align: right;">
-     
-     <el-button type="primary" @click="table = true" >工具箱</el-button><el-button type="primary" @click="open2">交卷</el-button>
 
-<el-drawer
-  title="考试工具箱"
-  :visible.sync="table"
-  direction="rtl"
-  size="20%">
-  <el-button @click="cancelForm">铅笔</el-button>
-   <br>
-  <el-button @click="cancelForm">荧光笔批注</el-button>
-  <br>
-  <el-button @click="cancelForm">文本框</el-button>
-  <br>
-  <el-button @click="cancelForm">时钟计时</el-button>
-</el-drawer>
+      <el-button type="primary" @click="table1 = true">工具箱</el-button><el-button type="primary" @click="open2">交卷</el-button>
+
+      <el-drawer
+        title="考试工具箱"
+        :visible.sync="table1"
+        direction="rtl"
+        size="20%"
+      >
+        <el-button @click="cancelForm">铅笔</el-button>
+        <br>
+        <el-button @click="cancelForm">荧光笔批注</el-button>
+        <br>
+        <el-button @click="cancelForm">文本框</el-button>
+        <br>
+        <el-button @click="cancelForm">时钟计时</el-button>
+      </el-drawer>
 
     </el-row>
     <img height="120px" :src="src">
@@ -56,7 +57,7 @@ export default {
   data() {
     return {
       drawer: false,
-      table: false,
+      table1: false,
       A: '4',
       B: '1',
       C: '3',
@@ -66,7 +67,7 @@ export default {
       radio: 0,
       textarea: ''
 
-    };
+    }
   },
   methods: {
     open2() {
@@ -93,9 +94,40 @@ export default {
       }
     },
     goBack() {
-      this.$router.push({ name: '首页' })
+      this.$confirm('是否退出考试!', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '正在退出!'
+        })
+        const timejump = 1
+        if (!this.timer) {
+          this.count = timejump
+          this.show = false
+          this.timer = setInterval(() => {
+            if (this.count > 0 && this.count <= timejump) {
+              this.count--
+            } else {
+              this.show = true
+              clearInterval(this.timer)
+              this.timer = null
+              // 跳转的页面写在此处
+              this.$router.push({ name: '首页' })
+            }
+          }, 1000)
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
     },
     next() {
+      this.radio = 0
       if (this.active++ > 9) {
         this.$notify({
           title: '提示',
@@ -177,6 +209,7 @@ export default {
       }
     },
     back() {
+      this.radio = 0
       if (this.active-- < 1) {
         this.$notify({
           title: '提示',
@@ -256,9 +289,8 @@ export default {
         this.C = '8'
         this.D = '3'
       }
-
     }
-      
+
   }
 }
 </script>

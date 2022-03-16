@@ -50,6 +50,12 @@ export const constantRoutes = [
   },
 
   {
+    path: '/exam',
+    hidden: true,
+    component: () => import('@/views/ceshi/1/index')
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/index',
@@ -111,46 +117,6 @@ export const constantRoutes = [
         meta: { title: '基本资料' }
       }
     ]
-  },
-
-  {
-    path: '/tjfk',
-    component: Layout,
-    redirect: '/tjfk',
-    children: [
-      {
-        path: 'index',
-        name: '提交反馈',
-        component: () => import('@/views/tjfk/index'),
-        meta: { title: '提交反馈', icon: 'el-icon-chat-round' }
-      }
-    ]
-  },
-
-  {
-    path: '/lxwm',
-    component: Layout,
-    redirect: '/lxwm',
-    children: [
-      {
-        path: 'index',
-        name: '联系我们',
-        component: () => import('@/views/lxwm/index'),
-        meta: { title: '联系我们', icon: 'el-icon-headset' }
-      }
-    ]
-  },
-  {
-    path: '/exam',
-    component: Layout,
-    hidden: true,
-    redirect: '/index',
-    children: [{
-      path: 'index',
-      name: '考试',
-      component: () => import('@/views/ceshi/1/index'),
-      meta: { title: '考试', icon: 'dashboard' }
-    }]
   }
 ]
 
