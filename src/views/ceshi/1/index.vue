@@ -1,54 +1,55 @@
 <template>
   <el-card class="box-card-component" style="margin:10px;">
-    <el-page-header content="南通大学高等数学(一)期末考试" @back="goBack" />
+    <el-page-header content="南通大学大学英语(一)期末考试" @back="goBack" />
     <el-row :gutter="20" style="text-align: right;">
 
       <el-button type="primary" @click="table2 = true">答题卡</el-button>
-      <el-button icon="el-icon-s-cooperation" type="primary" @click="table1 = true"></el-button>
+      <el-button icon="el-icon-s-cooperation" type="primary" @click="table1 = true" />
       <el-button type="primary" @click="open2">交卷</el-button>
     </el-row>
-      <el-drawer
-        title="考试工具箱"
-        :visible.sync="table1"
-        direction="rtl"
-        size="20%"
-      >
+    <el-drawer
+      title="考试工具箱"
+      :visible.sync="table1"
+      direction="rtl"
+      size="20%"
+    >
       <span>
-        <el-button @click="cancelForm">铅笔</el-button>
+        <el-button icon="el-icon-edit" style="margin:10px;" @click="cancelForm">铅笔</el-button>
         <br>
-        <el-button @click="cancelForm">荧光笔批注</el-button>
+        <el-button icon="el-icon-edit" style="margin:10px;" @click="cancelForm">荧光笔批注</el-button>
         <br>
-        <el-button @click="cancelForm">文本框</el-button>
+        <el-button icon="el-icon-edit-outline" style="margin:10px;" @click="cancelForm">文本框</el-button>
         <br>
-        <el-button @click="cancelForm">时钟计时</el-button>
-        </span>
-      </el-drawer>
-      <el-drawer
-        title="答题卡"
-        :visible.sync="table2"
-        direction="rtl"
-        size="20%">
-        <div style="margin:10px">
-          <p>选择题</p>
-          <el-row >
-          <el-button size="mini" round :type="type1" @click="next1">1</el-button>
-          <el-button size="mini" :type="type2" round>2</el-button>
-          <el-button size="mini" round>3</el-button>
+        <el-button icon="el-icon-time" style="margin:10px;" @click="cancelForm">时钟计时</el-button>
+      </span>
+    </el-drawer>
+    <el-drawer
+      title="答题卡"
+      :visible.sync="table2"
+      direction="rtl"
+      size="20%"
+    >
+      <div style="margin:10px">
+        <p>选择题</p>
+        <el-row>
+          <el-button id="1" size="mini" round @click="next1">1</el-button>
+          <el-button id="2" size="mini" round>2</el-button>
+          <el-button id="3" size="mini" round>3</el-button>
           <el-button size="mini" round>4</el-button>
-          </el-row>
-          <el-row style="margin-top:10px">
+        </el-row>
+        <el-row style="margin-top:10px">
           <el-button size="mini" round>5</el-button>
           <el-button size="mini" round>6</el-button>
           <el-button size="mini" round>7</el-button>
           <el-button size="mini" round>8</el-button>
-          </el-row>
-          <el-row style="margin-top:10px">
-          <el-button size="mini" round>09</el-button>
+        </el-row>
+        <el-row style="margin-top:10px">
+          <el-button size="mini" round>9</el-button>
           <el-button size="mini" round>10</el-button>
-          </el-row>
-        </div>
-      
-      </el-drawer>
+        </el-row>
+      </div>
+
+    </el-drawer>
 
     <img height="120px" :src="src">
     <div>
@@ -96,8 +97,8 @@ export default {
       active: 0,
       radio: 0,
       textarea: '',
-      type1: "",
-      type2: "",
+      type1: '',
+      type2: ''
     }
   },
   methods: {

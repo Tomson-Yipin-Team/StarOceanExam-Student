@@ -45,25 +45,9 @@
           <!-- Table -->
           <el-dialog title="成绩分析" :visible.sync="dialogTableVisible">
             <el-card class="box-card-component" style="margin-left:8px;">
-              <div style="position:relative;">
-                <pan-thumb :image="avatar" class="panThumb" />
-                <div style="padding-top:10px;" class="progress-item">
-                  <span>选择题：</span>
-                  <el-progress :percentage="90" :color="customColors" />
-                </div>
-                <div class="progress-item">
-                  <span>填空题</span>
-                  <el-progress :percentage="65" :color="customColors" />
-                </div>
-                <div class="progress-item">
-                  <span>阅读</span>
-                  <el-progress :percentage="70" :color="customColors" />
-                </div>
-                <div class="progress-item">
-                  <span>作文</span>
-                  <el-progress :percentage="80" :color="customColors" />
-                </div>
-              </div>
+              <el-col :xs="22" :sm="22" :md="22" :lg="9" :xl="9" :offset="1" class="content">
+                <UserCard />
+              </el-col>
             </el-card>
           </el-dialog>
         </template>
@@ -78,7 +62,10 @@
 }
 </style>
 <script>
+import UserCard from './componments/cjfx'
 export default {
+  name: 'PersonIndex',
+  components: { UserCard },
   data() {
     return {
       dialogTableVisible: false,
@@ -124,12 +111,7 @@ export default {
     }
   },
   methods: {
-    handleEdit(index, row) {
-      this.$alert('该学科分数为:' + row.fraction, '', {
-        confirmButtonText: '确定',
-        callback: (action) => {}
-      })
-    }
+
   }
 }
 </script>
