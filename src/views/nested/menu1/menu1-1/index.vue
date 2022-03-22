@@ -44,9 +44,11 @@
           >成绩分析</el-button>
           <!-- Table -->
           <el-dialog title="成绩分析" :visible.sync="dialogTableVisible">
-            <el-card class="box-card-component" style="margin-left:8px;">
+            <el-card class="" style="margin-left:8px;">
               <el-col :xs="22" :sm="22" :md="22" :lg="9" :xl="9" :offset="1" class="content">
                 <UserCard />
+              </el-col><el-col :xs="22" :sm="22" :md="22" :lg="11" :xl="10" :offset="3" class="content">
+                <PaiHang />
               </el-col>
             </el-card>
           </el-dialog>
@@ -63,9 +65,10 @@
 </style>
 <script>
 import UserCard from './componments/cjfx'
+import PaiHang from './componments/paihang'
 export default {
   name: 'PersonIndex',
-  components: { UserCard },
+  components: { UserCard, PaiHang },
   data() {
     return {
       dialogTableVisible: false,
