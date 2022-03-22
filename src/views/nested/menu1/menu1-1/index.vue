@@ -51,6 +51,10 @@
                 <PaiHang />
               </el-col>
             </el-card>
+            <span slot="footer" class="dialog-footer">
+              <el-button @click="dialogTableVisible = false">关闭页面</el-button>
+              <el-button type="primary" @click="ckxq">查看详情</el-button>
+            </span>
           </el-dialog>
         </template>
       </el-table-column>
@@ -114,7 +118,24 @@ export default {
     }
   },
   methods: {
-
+    ckxq() {
+      const timejump = 1
+      if (!this.timer) {
+        this.count = timejump
+        this.show = false
+        this.timer = setInterval(() => {
+          if (this.count > 0 && this.count <= timejump) {
+            this.count--
+          } else {
+            this.show = true
+            clearInterval(this.timer)
+            this.timer = null
+            // 跳转的页面写在此处
+            this.$router.push({ path: '/cjfx' })
+          }
+        }, 1000)
+      }
+    }
   }
 }
 </script>

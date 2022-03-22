@@ -30,14 +30,6 @@
 </style>
 <script>
 export default {
-    methods: {
-      tableRowClassName({row, rowIndex}) {
-        if (rowIndex === 3) {
-          return 'warning-row';
-        }
-        return '';
-      }
-    },
   data() {
     return {
       tableData: [{
@@ -69,6 +61,14 @@ export default {
         name: '88',
         address: '周**'
       }]
+    }
+  },
+  methods: {
+    tableRowClassName({ row, rowIndex }) {
+      if (rowIndex === 3) {
+        return 'warning-row'
+      }
+      return ''
     }
   }
 }

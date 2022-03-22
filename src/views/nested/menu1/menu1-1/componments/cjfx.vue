@@ -68,8 +68,10 @@ export default {
             }
           },
           indicator: [
+            { name: '听力', max: 30 },
             { name: '填空题', max: 40 },
             { name: '选择题', max: 50 },
+            { name: '阅读', max: 60 },
             { name: '作文', max: 60 }
 
           ]
@@ -93,15 +95,15 @@ export default {
           },
           data: [
             {
-              value: [38, 50, 54],
+              value: [26, 38, 50, 54, 56],
               name: '最高得分'
             },
             {
-              value: [28, 40, 45],
+              value: [20, 28, 40, 45, 48],
               name: '你的得分'
             },
             {
-              value: [20, 30, 47],
+              value: [15, 20, 30, 47, 36],
               name: '平均得分'
             }
           ],

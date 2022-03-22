@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card-component" style="margin:10px;">
-    <el-page-header content="南通大学大学英语(一)期末考试" @back="goBack" />
+    <el-page-header :content="biaoti" @back="goBack" />
     <el-row :gutter="20" style="text-align: right;">
 
       <el-button type="primary" @click="table2 = true">答题卡</el-button>
@@ -32,9 +32,9 @@
       <div style="margin:10px">
         <p>选择题</p>
         <el-row>
-          <el-button id="1" size="mini" round @click="next1">1</el-button>
-          <el-button id="2" size="mini" round>2</el-button>
-          <el-button id="3" size="mini" round>3</el-button>
+          <el-button id="1" size="mini" round :type="type1" @click="next1">1</el-button>
+          <el-button id="2" size="mini" round :type="type2" @click="next2">2</el-button>
+          <el-button id="3" size="mini" round @click="next3">3</el-button>
           <el-button size="mini" round>4</el-button>
         </el-row>
         <el-row style="margin-top:10px">
@@ -51,7 +51,7 @@
 
     </el-drawer>
 
-    <img height="120px" :src="src">
+    <img height="150px" :src="src">
     <div>
       <el-radio-group v-model="radio">
         <el-radio :label="3">A:{{ A }}</el-radio>
@@ -86,19 +86,20 @@
 export default {
   data() {
     return {
+      biaoti: '南通大学大学英语（一）期末考试',
       drawer: false,
       table1: false,
       table2: false,
-      A: '4',
-      B: '1',
-      C: '3',
-      D: '2',
+      A: 'the',
+      B: 'a',
+      C: 'an',
+      D: '不填',
       src: require('./img/1.png'),
       active: 0,
       radio: 0,
       textarea: '',
-      type1: '',
-      type2: ''
+      type1: 'primary',
+      type2: 'success'
     }
   },
   methods: {
@@ -158,6 +159,29 @@ export default {
         })
       })
     },
+    next1() {
+      this.src = require('./img/1.png')
+      this.A = 'the'
+      this.B = 'a'
+      this.C = 'an'
+      this.D = '不填'
+    },
+    next2() {
+      this.src = require('./img/2.png')
+      this.biaoti = '南通大学大学英语（一）期末考试'
+      this.A = 'on'
+      this.B = 'at'
+      this.C = 'in'
+      this.D = 'by'
+    },
+    next3() {
+      this.src = require('./img/3.png')
+      this.biaoti = '南通大学程序设计基础期末考试'
+      this.A = '2'
+      this.B = '4'
+      this.C = '9'
+      this.D = '6'
+    },
     next() {
       this.radio = 0
       if (this.active++ > 9) {
@@ -171,20 +195,22 @@ export default {
       }
       if (this.active === 0) {
         this.src = require('./img/1.png')
-        this.A = '4'
-        this.B = '1'
-        this.C = '3'
-        this.D = '2'
+        this.A = 'the'
+        this.B = 'a'
+        this.C = 'an'
+        this.D = '不填'
       }
       if (this.active === 1) {
         this.src = require('./img/2.png')
-        this.A = '5'
-        this.B = '2'
-        this.C = '6'
-        this.D = '3'
+        this.biaoti = '南通大学大学英语（一）期末考试'
+        this.A = 'on'
+        this.B = 'at'
+        this.C = 'in'
+        this.D = 'by'
       }
       if (this.active === 2) {
         this.src = require('./img/3.png')
+        this.biaoti = '南通大学程序设计基础期末考试'
         this.A = '2'
         this.B = '4'
         this.C = '9'
@@ -253,20 +279,22 @@ export default {
       }
       if (this.active === 0) {
         this.src = require('./img/1.png')
-        this.A = '4'
-        this.B = '1'
-        this.C = '3'
-        this.D = '2'
+        this.A = 'the'
+        this.B = 'a'
+        this.C = 'an'
+        this.D = '不填'
       }
       if (this.active === 1) {
         this.src = require('./img/2.png')
-        this.A = '5'
-        this.B = '2'
-        this.C = '6'
-        this.D = '3'
+        this.biaoti = '南通大学大学英语（一）期末考试'
+        this.A = 'on'
+        this.B = 'at'
+        this.C = 'in'
+        this.D = 'by'
       }
       if (this.active === 2) {
         this.src = require('./img/3.png')
+        this.biaoti = '南通大学程序设计基础期末考试'
         this.A = '2'
         this.B = '4'
         this.C = '9'
