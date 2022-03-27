@@ -87,36 +87,66 @@ export const constantRoutes = [
       }
     ]
   },
-
+  // {
+  //   path: '/grzx',
+  //   component: Layout,
+  //   redirect: '/grzx/wdbj',
+  //   name: 'grzx',
+  //   meta: {
+  //     title: '个人中心',
+  //     icon: 'nested'
+  //   },
+  //   // children: [
+  //   //   {
+  //   //     path: 'wdbj',
+  //   //     component: () => import('@/views/nested/menu1/index'),
+  //   //     name: '我的班级',
+  //   //     meta: { title: '我的班级' }
+  //   //   },
+  //   //   {
+  //   //     path: 'cjfx',
+  //   //     component: () => import('@/views/nested/menu1/menu1-1/index'),
+  //   //     name: '成绩分析',
+  //   //     meta: { title: '成绩分析' }
+  //   //   },
+  //   //   {
+  //   //     path: 'jbzl',
+  //   //     component: () => import('@/views/nested/personal/index'),
+  //   //     name: '基本资料',
+  //   //     meta: { title: '基本资料' }
+  //   //   }
+  //   // ]
+    
+  // },
   {
-    path: '/grzx',
+    path: '/class',
     component: Layout,
-    redirect: '/grzx/wdbj',
-    name: 'grzx',
-    meta: {
-      title: '个人中心',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'wdbj',
-        component: () => import('@/views/nested/menu1/index'),
-        name: '我的班级',
-        meta: { title: '我的班级' }
-      },
-      {
-        path: 'cjfx',
-        component: () => import('@/views/nested/menu1/menu1-1/index'),
-        name: '成绩分析',
-        meta: { title: '成绩分析' }
-      },
-      {
-        path: 'jbzl',
-        component: () => import('@/views/nested/personal/index'),
-        name: '基本资料',
-        meta: { title: '基本资料' }
-      }
-    ]
+    children: [{
+      path: 'index',
+      name: 'Class',
+      component: () => import('@/views/nested/menu1/index'),
+      meta: { title: '我的班级',icon: 'el-icon-chat-dot-round' }
+    }]
+  },
+  {
+    path: '/analysis',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'Analysis',
+      component: () => import('@/views/nested/menu1/menu1-1/index'),
+      meta: { title: '成绩分析',icon: 'el-icon-s-data' }
+    }]
+  },
+  {
+    path: '/information',
+    component: Layout,
+    children: [{
+      path: 'index',
+      name: 'Information',
+      component: () => import('@/views/nested/personal/index'),
+      meta: { title: '基本资料' ,icon: 'el-icon-s-custom'}
+    }]
   }
 ]
 

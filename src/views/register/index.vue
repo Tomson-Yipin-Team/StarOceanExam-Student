@@ -21,12 +21,12 @@
         hide-required-asterisk="true"
         size="medium"
       >
-        <div style="padding-top: 10px">
-          <el-form-item label="邮箱" prop="email">
-            <el-col :span="10">
+        <div class="box">
+          <el-form-item label="手机号" prop="email">
+            <el-col :span="20">
               <el-input
                 v-model="ruleForm.email"
-                placeholder="输入邮箱并点击发送验证码"
+                placeholder="输入手机号并点击发送验证码"
               />
             </el-col>
             <el-button
@@ -40,28 +40,28 @@
             <span class="status">{{ statusMsg }}</span>
           </el-form-item>
           <el-form-item label="验证码" prop="code">
-            <el-col :span="10">
+            <el-col :span="20">
               <el-input
                 v-model="ruleForm.code"
                 maxlength="6"
-                placeholder="请登录邮箱接收验证码"
+                placeholder="请输入手机号接收验证码"
               />
             </el-col>
           </el-form-item>
           <el-form-item label="密码" prop="pwd">
-            <el-col :span="10">
+            <el-col :span="20">
               <el-input v-model="ruleForm.pwd" type="password" />
             </el-col>
           </el-form-item>
           <el-form-item label="确认密码" prop="cpwd">
-            <el-col :span="10">
+            <el-col :span="20">
               <el-input v-model="ruleForm.cpwd" type="password" />
             </el-col>
           </el-form-item>
           <el-form-item>
             <el-button
               type="primary"
-              style="width: 40%"
+              style="width: 80%"
               @click="register"
             >注册</el-button>
           </el-form-item>
@@ -93,7 +93,7 @@ export default {
         email: [{
           required: true,
           type: 'email',
-          message: '请输入邮箱',
+          message: '请输入手机号',
           trigger: 'blur'
         }],
         code: [{
@@ -217,7 +217,7 @@ $cursor: #fff;
 .register-container {
   .el-input {
     display: inline-block;
-    height: 47px;
+    height: 80px;
     width: 95%;
 
     input {
@@ -236,11 +236,14 @@ $cursor: #fff;
       }
     }
   }
-
+  .box{
+    padding-top:140px;
+    padding-left:100px;
+  }
   .el-form-item {
     label {
       font-style: normal;
-      font-size: 12px;
+      font-size: 20px;
       color: $light_gray;
     }
   }

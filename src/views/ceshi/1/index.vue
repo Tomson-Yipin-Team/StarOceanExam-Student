@@ -1,6 +1,6 @@
 <template>
   <el-card class="box-card-component" style="margin:10px;">
-    <el-page-header content="南通大学高等数学(一)期末考试" @back="goBack" />
+    <el-page-header content="全国大学生四级英语考试听力部分" @back="goBack" />
     <el-row :gutter="20" style="text-align: right;">
 
       <el-button type="primary" @click="table2 = true">答题卡</el-button>
@@ -43,20 +43,20 @@
           <el-button size="mini" round>8</el-button>
           </el-row>
           <el-row style="margin-top:10px">
-          <el-button size="mini" round>09</el-button>
+          <el-button size="mini" round>9</el-button>
           <el-button size="mini" round>10</el-button>
           </el-row>
         </div>
       
       </el-drawer>
 
-    <img height="120px" :src="src">
+    <img height="300px" :src="src">
     <div>
       <el-radio-group v-model="radio">
-        <el-radio :label="3">A:{{ A }}</el-radio>
-        <el-radio :label="6">B:{{ B }}</el-radio>
-        <el-radio :label="9">C:{{ C }}</el-radio>
-        <el-radio :label="12">D:{{ D }}</el-radio>
+        <el-radio :label="3">A{{ A }}</el-radio>
+        <el-radio :label="6">B{{ B }}</el-radio>
+        <el-radio :label="9">C{{ C }}</el-radio>
+        <el-radio :label="12">D{{ D }}</el-radio>
       </el-radio-group>
     </div>
 
@@ -88,11 +88,11 @@ export default {
       drawer: false,
       table1: false,
       table2: false,
-      A: '4',
-      B: '1',
-      C: '3',
-      D: '2',
-      src: require('./img/1.png'),
+      A:' ',
+      B:' ',
+      C:' ',
+      D:' ',
+      src: require('./img/Listen01.jpg'),
       active: 0,
       radio: 0,
       textarea: '',
@@ -169,74 +169,74 @@ export default {
         this.active = 10
       }
       if (this.active === 0) {
-        this.src = require('./img/1.png')
-        this.A = '4'
-        this.B = '1'
-        this.C = '3'
-        this.D = '2'
+        this.src = require('./img/Listen01.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 1) {
-        this.src = require('./img/2.png')
-        this.A = '5'
-        this.B = '2'
-        this.C = '6'
-        this.D = '3'
+        this.src = require('./img/Listen02.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 2) {
-        this.src = require('./img/3.png')
-        this.A = '2'
-        this.B = '4'
-        this.C = '9'
-        this.D = '6'
+        this.src = require('./img/Listen03.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 3) {
-        this.src = require('./img/4.png')
-        this.A = '8'
-        this.B = '4'
-        this.C = '6'
-        this.D = '8'
+        this.src = require('./img/Listen04.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 4) {
-        this.src = require('./img/5.png')
-        this.A = '5'
-        this.B = '9'
-        this.C = '8'
-        this.D = '2'
+        this.src = require('./img/Listen05.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 5) {
-        this.src = require('./img/5.png')
-        this.A = '2'
-        this.B = '4'
-        this.C = '1'
-        this.D = '3'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 6) {
-        this.src = require('./img/7.png')
-        this.A = '3'
-        this.B = '4'
-        this.C = '8'
-        this.D = '1'
+        this.src = require('./img/Listen03.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 7) {
-        this.src = require('./img/8.png')
-        this.A = '7'
-        this.B = '5'
-        this.C = '9'
-        this.D = '1'
+        this.src = require('./img/Listen05.jpg')
+        this.A = ''
+        this.B = ''
+        this.C = ''
+        this.D = ''
       }
       if (this.active === 8) {
-        this.src = require('./img/9.png')
-        this.A = '8'
-        this.B = '5'
-        this.C = '4'
-        this.D = '6'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ''
+        this.B = ''
+        this.C = ''
+        this.D = ''
       }
       if (this.active === 9) {
-        this.src = require('./img/10.png')
-        this.A = '4'
-        this.B = '6'
-        this.C = '8'
-        this.D = '3'
+        this.src = require('./img/Listen01.jpg')
+        this.A = ''
+        this.B = ''
+        this.C = ''
+        this.D = ''
       }
     },
     back() {
@@ -251,74 +251,74 @@ export default {
         this.active = 0
       }
       if (this.active === 0) {
-        this.src = require('./img/1.png')
-        this.A = '4'
-        this.B = '1'
-        this.C = '3'
-        this.D = '2'
+        this.src = require('./img/Listen01.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 1) {
-        this.src = require('./img/2.png')
-        this.A = '5'
-        this.B = '2'
-        this.C = '6'
-        this.D = '3'
+        this.src = require('./img/Listen02.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 2) {
-        this.src = require('./img/3.png')
-        this.A = '2'
-        this.B = '4'
-        this.C = '9'
-        this.D = '6'
+        this.src = require('./img/Listen03.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 3) {
-        this.src = require('./img/4.png')
-        this.A = '8'
-        this.B = '4'
-        this.C = '6'
-        this.D = '8'
+        this.src = require('./img/Listen04.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 4) {
-        this.src = require('./img/5.png')
-        this.A = '5'
-        this.B = '9'
-        this.C = '8'
-        this.D = '2'
+        this.src = require('./img/Listen05.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 5) {
-        this.src = require('./img/5.png')
-        this.A = '2'
-        this.B = '4'
-        this.C = '1'
-        this.D = '3'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 6) {
-        this.src = require('./img/7.png')
-        this.A = '3'
-        this.B = '4'
-        this.C = '8'
-        this.D = '1'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 7) {
-        this.src = require('./img/8.png')
-        this.A = '7'
-        this.B = '5'
-        this.C = '9'
-        this.D = '1'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 8) {
-        this.src = require('./img/9.png')
-        this.A = '8'
-        this.B = '5'
-        this.C = '4'
-        this.D = '6'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
       if (this.active === 9) {
-        this.src = require('./img/10.png')
-        this.A = '4'
-        this.B = '6'
-        this.C = '8'
-        this.D = '3'
+        this.src = require('./img/Listen06.jpg')
+        this.A = ' '
+        this.B = ' '
+        this.C = ' '
+        this.D = ' '
       }
     }
 
