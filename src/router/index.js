@@ -56,6 +56,12 @@ export const constantRoutes = [
   },
 
   {
+    path: '/cjfx',
+    hidden: true,
+    component: () => import('@/views/nested/menu1/menu1-1/ckxq.vue')
+  },
+
+  {
     path: '/',
     component: Layout,
     redirect: '/index',

@@ -62,7 +62,7 @@ export default {
 //  height:200px;
 //}
 
-.user-avatar,{
+.user-avatar{
   text-align: center;
 }
 
