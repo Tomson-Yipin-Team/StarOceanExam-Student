@@ -68,7 +68,8 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       name: '首页',
-      component: () => import('@/views/dashboard/index')
+      component: () => import('@/views/dashboard/index'),
+      meta: { title: '首页', icon: 'el-icon-s-home' }
     }]
   },
 
@@ -122,7 +123,7 @@ export const constantRoutes = [
   //   //     meta: { title: '基本资料' }
   //   //   }
   //   // ]
-    
+
   // },
   {
     path: '/class',
@@ -131,7 +132,7 @@ export const constantRoutes = [
       path: 'index',
       name: 'Class',
       component: () => import('@/views/nested/menu1/index'),
-      meta: { title: '我的班级',icon: 'el-icon-chat-dot-round' }
+      meta: { title: '我的班级', icon: 'el-icon-chat-dot-round' }
     }]
   },
   {
@@ -141,7 +142,7 @@ export const constantRoutes = [
       path: 'index',
       name: 'Analysis',
       component: () => import('@/views/nested/menu1/menu1-1/index'),
-      meta: { title: '成绩分析',icon: 'el-icon-s-data' }
+      meta: { title: '成绩分析', icon: 'el-icon-s-data' }
     }]
   },
   {
@@ -151,7 +152,7 @@ export const constantRoutes = [
       path: 'index',
       name: 'Information',
       component: () => import('@/views/nested/personal/index'),
-      meta: { title: '基本资料' ,icon: 'el-icon-s-custom'}
+      meta: { title: '基本资料', icon: 'el-icon-s-custom' }
     }]
   }
 ]
