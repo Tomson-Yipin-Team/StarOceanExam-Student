@@ -6,7 +6,7 @@
       <div :class="{'fixed-header':fixedHeader}">
         <navbar />
       </div>
-      <app-main />
+      <app-main id="all-app-container" />
     </div>
   </div>
 </template>
@@ -90,4 +90,10 @@ export default {
   .mobile .fixed-header {
     width: 100%;
   }
+</style>
+<style>
+/*app-main的样式*/
+#all-app-container{
+  background-color: #e9eaf4;
+}
 </style>
