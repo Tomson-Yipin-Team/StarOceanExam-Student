@@ -2,75 +2,73 @@
   <el-card style="margin:20px;">
     <el-page-header content="成绩分析" @back="goBack" />
     <el-row>
-    <el-card style="margin:8px" shadow="hover">
-<el-descriptions class="margin-top" title="全国大学生四级英语考试" :column="4" :size="size" border>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-user" />
-            姓名
-          </template>
-          张三
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-user" />
-            学号
-          </template>
-          2130110451
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-time" />
-            考试时间
-          </template>
-          2022-07-02-08:00
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-user" />
-            考试人数
-          </template>
-          2456
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-tickets" />
-            最高分
-          </template>
-          <el-tag size="small">652分</el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-tickets" />
-            考试成绩
-          </template>
-          <el-tag size="small">502分</el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-office-building" />
-            平均分
-          </template>
-          <el-tag size="small">454分</el-tag>
-        </el-descriptions-item>
-        <el-descriptions-item>
-          <template slot="label">
-            <i class="el-icon-office-building" />
-            考试排名
-          </template>
-          第<el-tag size="small" type="success">1126</el-tag>名
-        </el-descriptions-item>
-        
-        
-      </el-descriptions>
+      <el-card style="margin:8px" shadow="hover">
+        <el-descriptions class="margin-top" title="全国大学生四级英语考试" :column="4" :size="size" border>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-user" />
+              姓名
+            </template>
+            张三
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-user" />
+              学号
+            </template>
+            2130110451
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-time" />
+              考试时间
+            </template>
+            2022-07-02-08:00
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-user" />
+              考试人数
+            </template>
+            2456
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-tickets" />
+              最高分
+            </template>
+            <el-tag size="small">652分</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-tickets" />
+              考试成绩
+            </template>
+            <el-tag size="small">502分</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-office-building" />
+              平均分
+            </template>
+            <el-tag size="small">454分</el-tag>
+          </el-descriptions-item>
+          <el-descriptions-item>
+            <template slot="label">
+              <i class="el-icon-office-building" />
+              考试排名
+            </template>
+            第<el-tag size="small" type="success">1126</el-tag>名
+          </el-descriptions-item>
 
+        </el-descriptions>
 
-    </el-card>
+      </el-card>
     </el-row>
     <el-card style="margin:8px" shadow="hover">
-    <el-row style="height:580px">
-      <chart height="100%" width="100%" />
-    </el-row>
+      <el-row style="height:580px">
+        <chart height="100%" width="100%" />
+      </el-row>
     </el-card>
   </el-card>
 </template>
@@ -85,12 +83,10 @@
   }
 </style>
 <script>
-import UserCard from './componments/cjfx'
-import PaiHang from './componments/paihang'
 import Chart from '@/components/Charts/MixChart'
 export default {
   name: 'PersonIndex',
-  components: { UserCard, PaiHang, Chart },
+  components: { Chart },
   methods: {
     goBack() {
       this.$router.push({ name: '首页' })

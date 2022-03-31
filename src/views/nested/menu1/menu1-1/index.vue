@@ -40,22 +40,8 @@
           <el-button
             size="mini"
             type="primary"
-            @click="dialogTableVisible = true"
+            @click="ckxq"
           >成绩分析</el-button>
-          <!-- Table -->
-          <el-dialog title="成绩分析" :visible.sync="dialogTableVisible">
-            <el-card class="" style="margin-left:8px;">
-              <el-col :xs="22" :sm="22" :md="22" :lg="9" :xl="9" :offset="1" class="content">
-                <UserCard />
-              </el-col><el-col :xs="22" :sm="22" :md="22" :lg="11" :xl="10" :offset="3" class="content">
-                <PaiHang />
-              </el-col>
-            </el-card>
-            <span slot="footer" class="dialog-footer">
-              <el-button @click="dialogTableVisible = false">关闭页面</el-button>
-              <el-button type="primary" @click="ckxq">查看详情</el-button>
-            </span>
-          </el-dialog>
         </template>
       </el-table-column>
     </el-table>
@@ -68,11 +54,7 @@
 }
 </style>
 <script>
-import UserCard from './componments/cjfx'
-import PaiHang from './componments/paihang'
 export default {
-  name: 'PersonIndex',
-  components: { UserCard, PaiHang },
   data() {
     return {
       dialogTableVisible: false,
@@ -119,22 +101,7 @@ export default {
   },
   methods: {
     ckxq() {
-      const timejump = 1
-      if (!this.timer) {
-        this.count = timejump
-        this.show = false
-        this.timer = setInterval(() => {
-          if (this.count > 0 && this.count <= timejump) {
-            this.count--
-          } else {
-            this.show = true
-            clearInterval(this.timer)
-            this.timer = null
-            // 跳转的页面写在此处
-            this.$router.push({ path: '/cjfx' })
-          }
-        }, 1000)
-      }
+      this.$router.push({ path: '/cjfx' })
     }
   }
 }

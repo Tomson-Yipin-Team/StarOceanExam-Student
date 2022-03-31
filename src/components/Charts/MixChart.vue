@@ -46,15 +46,15 @@ export default {
       this.chart = echarts.init(document.getElementById(this.id))
       const xData = (function() {
         const data = []
-        
-          data.push('听力A')
-          data.push('听力B')
-          data.push('听力C')
-          data.push('阅读')
-          data.push('完形填空')
-          data.push('语法填空')
-          data.push('翻译')
-          data.push('作文')
+
+        data.push('听力A')
+        data.push('听力B')
+        data.push('听力C')
+        data.push('阅读')
+        data.push('完形填空')
+        data.push('语法填空')
+        data.push('翻译')
+        data.push('作文')
         return data
       }())
       this.chart.setOption({
@@ -208,7 +208,7 @@ export default {
           name: '平均分',
           type: 'bar',
           stack: 'total1',
-           barMaxWidth: 35,
+          barMaxWidth: 35,
           barGap: '10%',
           itemStyle: {
             normal: {
