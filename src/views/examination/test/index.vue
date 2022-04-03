@@ -14,13 +14,13 @@
       size="20%"
     >
       <span>
-        <el-button @click="cancelForm">铅笔</el-button>
+        <el-button>铅笔</el-button>
         <br>
-        <el-button @click="cancelForm">荧光笔批注</el-button>
+        <el-button>荧光笔批注</el-button>
         <br>
-        <el-button @click="cancelForm">文本框</el-button>
+        <el-button>文本框</el-button>
         <br>
-        <el-button @click="cancelForm">时钟计时</el-button>
+        <el-button>时钟计时</el-button>
       </span>
     </el-drawer>
     <el-drawer

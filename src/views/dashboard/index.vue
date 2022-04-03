@@ -38,7 +38,7 @@
       >
         <el-table-column
           label="考试名称"
-          width="360"
+          fixed="left"
         >
           <template slot-scope="scope">
             <i class="el-icon-collection" />
@@ -47,7 +47,7 @@
         </el-table-column>
         <el-table-column
           label="参考人数"
-          width="120"
+          width="200"
         >
           <template slot-scope="scope">
             <i class="el-icon-user" />
@@ -56,7 +56,7 @@
         </el-table-column>
         <el-table-column
           label="日期"
-          width="180"
+          width="200"
         >
           <template slot-scope="scope">
             <i class="el-icon-time" />
@@ -65,7 +65,7 @@
         </el-table-column>
         <el-table-column
           label="状态"
-          width="80"
+          width="150"
         >
           <template slot-scope="scope">
             <div slot="reference" class="name-wrapper">
@@ -73,7 +73,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="200" fixed="right">
           <template slot-scope="scope">
             <el-button
               size="mini"
@@ -96,7 +96,7 @@
       >
         <el-table-column
           label="考试名称"
-          width="360"
+          fixed="left"
         >
           <template slot-scope="scope">
             <i class="el-icon-collection" />
@@ -105,7 +105,7 @@
         </el-table-column>
         <el-table-column
           label="参考人数"
-          width="120"
+          width="200"
         >
           <template slot-scope="scope">
             <i class="el-icon-user" />
@@ -114,7 +114,7 @@
         </el-table-column>
         <el-table-column
           label="日期"
-          width="180"
+          width="200"
         >
           <template slot-scope="scope">
             <i class="el-icon-time" />
@@ -123,7 +123,7 @@
         </el-table-column>
         <el-table-column
           label="状态"
-          width="80"
+          width="150"
         >
           <template slot-scope="scope">
             <div slot="reference" class="name-wrapper">
@@ -131,7 +131,7 @@
             </div>
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="200" fixed="right">
           <template slot-scope="scope">
             <el-button
               size="mini"
