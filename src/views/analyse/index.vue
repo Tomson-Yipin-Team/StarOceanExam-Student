@@ -40,7 +40,7 @@
           <el-button
             size="mini"
             type="primary"
-            @click="ckxq"
+            @click="handleAnalyse"
           >成绩分析</el-button>
         </template>
       </el-table-column>
@@ -100,8 +100,8 @@ export default {
     }
   },
   methods: {
-    ckxq() {
-      this.$router.push({ path: '/cjfx' })
+    handleAnalyse() {
+      this.$router.push({ path: '/analysis-detail' })
     }
   }
 }

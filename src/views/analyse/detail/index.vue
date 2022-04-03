@@ -3,7 +3,7 @@
     <el-page-header content="成绩分析" @back="goBack" />
     <el-row>
       <el-card style="margin:8px" shadow="hover">
-        <el-descriptions class="margin-top" title="全国大学生四级英语考试" :column="4" :size="size" border>
+        <el-descriptions class="margin-top" title="全国大学生四级英语考试" :column="4" border>
           <el-descriptions-item>
             <template slot="label">
               <i class="el-icon-user" />
@@ -84,8 +84,9 @@
 </style>
 <script>
 import Chart from '@/components/Charts/MixChart'
+
 export default {
-  name: 'PersonIndex',
+  name: 'AnalyseDetail',
   components: { Chart },
   methods: {
     goBack() {
