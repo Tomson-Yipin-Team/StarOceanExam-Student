@@ -3,7 +3,7 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">教考分离系统登录</h3>
       </div>
 
       <el-form-item prop="username">
@@ -11,9 +11,9 @@
           <svg-icon icon-class="user" />
         </span>
         <el-input
-          ref="username"
+          ref="Username"
           v-model="loginForm.username"
-          placeholder="Username"
+          placeholder="用户名"
           name="username"
           type="text"
           tabindex="1"
@@ -30,7 +30,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="Password"
+          placeholder="密码"
           name="password"
           tabindex="2"
           auto-complete="on"
@@ -41,13 +41,14 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
+      <el-button :loading="loading" class="Login_button" type="primary" style="width:100%;margin-bottom:30px;color:lightgray" @click.native.prevent="handleLogin">登录</el-button>
 
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
+      <div class="icons">
+        <span class="LoginIcon"><svg-icon icon-class="QQ" /></span>
+        <span class="LoginIcon"><svg-icon icon-class="微信" /> </span>
+        <span id="register"><el-link @click="toRegister">注册账号</el-link></span>
+        <span id="help">忘记密码</span>
       </div>
-
     </el-form>
   </div>
 </template>
@@ -120,6 +121,9 @@ export default {
           return false
         }
       })
+    },
+    toRegister() {
+      this.$router.push('/register')
     }
   }
 }
@@ -178,10 +182,15 @@ $dark_gray:#889aa4;
 $light_gray:#eee;
 
 .login-container {
-  min-height: 100%;
-  width: 100%;
-  background-color: $bg;
-  overflow: hidden;
+  // min-height: 100%;
+  // width: 100%;
+  // background-color: $bg;
+  // overflow: hidden;
+  background: url("../../assets/Login_background/Back_ground.png");
+  width:100%;
+  height:100%;
+  position:fixed;
+  background-size:100% 100%;
 
   .login-form {
     position: relative;
@@ -191,27 +200,50 @@ $light_gray:#eee;
     margin: 0 auto;
     overflow: hidden;
   }
-
-  .tips {
-    font-size: 14px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
+  .icons{
+      padding: 6px 5px 6px 15px;
+      font-size: 25px;
+      .LoginIcon{
+       padding: 6px 20px 6px 15px;
+       color: $dark_gray;
       }
-    }
+      #register{
+        padding: 6px 20px 6px 120px;
+        font-size: 15px;
+        color: rgb(177, 173, 173);
+        vertical-align: middle;
+      }
+      #help{
+        padding: 6px 5px 6px 15px;
+        font-size: 14px;
+        color: rgb(177, 173, 173);
+        vertical-align: middle;
+      }
   }
+  //  .tips {
+  //   float: right;
+  //   font-size: 14px;
+  //   color: #fff;
+  //   margin-bottom: 10px;
 
+  //   span {
+  //     &:first-of-type {
+  //       margin-right: 16px;
+  //     }
+  //   }
+  // }
   .svg-container {
     padding: 6px 5px 6px 15px;
     color: $dark_gray;
     vertical-align: middle;
     width: 30px;
     display: inline-block;
+    font-size: 15px;
   }
-
+  .Login_button{
+    background-color: rgb(72, 64, 87);
+    border-color: transparent;
+  }
   .title-container {
     position: relative;
 
@@ -233,5 +265,17 @@ $light_gray:#eee;
     cursor: pointer;
     user-select: none;
   }
+}
+</style>
+<style scoped>
+/* 修改验证器样式 */
+ .el-form-item.is-error .el-input__inner {
+  border-color: #889aa4;
+}
+ .el-form-item.is-error .el-input__validateIcon {
+  color: #889aa4;
+}
+ .el-form-item__error {
+  color: #e6a23c;
 }
 </style>

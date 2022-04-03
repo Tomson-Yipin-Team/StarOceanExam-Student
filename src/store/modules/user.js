@@ -57,7 +57,7 @@ const actions = {
           return reject('验证失败，请重新登录')
         }
 
-        const {roles, name, avatar } = data
+        const { roles, name, avatar } = data
         commit('SET_ROLES', roles)
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
@@ -100,5 +100,4 @@ export default {
   mutations,
   actions
 }
-
 
