@@ -1,6 +1,6 @@
 <template>
   <div class="register-container">
-    <article class="header">
+    <article class="header-card">
       <header>
         <el-avatar icon="el-icon-user-solid" shape="circle" />
         <span class="login">
@@ -173,6 +173,10 @@ export default {
 
     // 用户注册
     register: function() {
+      function encrypt(pwd) {
+        console.log('')
+      }
+
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           const user = {
@@ -261,7 +265,7 @@ $light_gray: #eee;
   background-color: $bg;
   overflow: hidden;
 
-  .header {
+  .header-card {
     border-bottom: 2px solid rgb(235, 232, 232);
     min-width: 980px;
     color: #666;
