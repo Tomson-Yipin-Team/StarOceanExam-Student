@@ -47,7 +47,7 @@
         <span class="LoginIcon"><svg-icon icon-class="QQ" /></span>
         <span class="LoginIcon"><svg-icon icon-class="微信" /> </span>
         <span id="register"><el-link @click="toRegister">注册账号</el-link></span>
-        <span id="help">忘记密码</span>
+        <span id="help"><el-link @click="toForget">忘记密码</el-link></span>
       </div>
     </el-form>
   </div>
@@ -124,6 +124,9 @@ export default {
     },
     toRegister() {
       this.$router.push('/register')
+    },
+    toForget() {
+      this.$router.push('/forget')
     }
   }
 }

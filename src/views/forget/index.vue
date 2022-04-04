@@ -1,10 +1,10 @@
 <template>
   <div class="register-container">
-    <article class="header-card">
+    <article class="header">
       <header>
-        <el-avatar src="https://snz04pap001files.storage.live.com/y4m-AveJOL6Bt7kQQEWolmDjUa3tezMydmpNlhGjxB464X3XQUyYZw-AqtFIfbrJfnJ02v4eb-8Jt0GwkeQZCc7WRsrQua8FG2SPSfnqJ0evyAuWpd3gFFWugncVNOzmuUVdGFiPiBaTwOCH0z_duK0hAPGQoJRAtQgB4jtpJv7lZmqqw3wQXSF7zWFCxrOvQxp?width=700&height=700&cropmode=none" shape="circle" />
+        <el-avatar  shape="circle" src="https://snz04pap001files.storage.live.com/y4m-AveJOL6Bt7kQQEWolmDjUa3tezMydmpNlhGjxB464X3XQUyYZw-AqtFIfbrJfnJ02v4eb-8Jt0GwkeQZCc7WRsrQua8FG2SPSfnqJ0evyAuWpd3gFFWugncVNOzmuUVdGFiPiBaTwOCH0z_duK0hAPGQoJRAtQgB4jtpJv7lZmqqw3wQXSF7zWFCxrOvQxp?width=700&height=700&cropmode=none"/>
         <span class="login">
-          <em class="bold">已有账号？</em>
+          <em class="bold">想起密码？</em>
           <a href="/login">
             <el-button type="primary" size="mini">登录</el-button>
           </a>
@@ -26,7 +26,7 @@
             <el-col :span="20">
               <el-input
                 v-model="ruleForm.email"
-                placeholder="输入手机号并点击发送验证码"
+                placeholder="请输入已有账号所绑定手机号"
               />
             </el-col>
             <el-button
@@ -48,12 +48,12 @@
               />
             </el-col>
           </el-form-item>
-          <el-form-item label="密码" prop="pwd">
+          <el-form-item label="账号" prop="pwd">
             <el-col :span="20">
-              <el-input v-model="ruleForm.pwd" type="password" />
+              <el-input v-model="ruleForm.pwd" type="password" placeholder="请输入需要修改密码的账号" />
             </el-col>
           </el-form-item>
-          <el-form-item label="确认密码" prop="cpwd">
+          <el-form-item label="新密码" prop="cpwd">
             <el-col :span="20">
               <el-input v-model="ruleForm.cpwd" type="password" />
             </el-col>
@@ -63,7 +63,7 @@
               type="primary"
               style="width: 80%"
               @click="register"
-            >注册</el-button>
+            >修改密码</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -173,10 +173,6 @@ export default {
 
     // 用户注册
     register: function() {
-      function encrypt(pwd) {
-        console.log('')
-      }
-
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           const user = {
@@ -265,7 +261,7 @@ $light_gray: #eee;
   background-color: $bg;
   overflow: hidden;
 
-  .header-card {
+  .header {
     border-bottom: 2px solid rgb(235, 232, 232);
     min-width: 980px;
     color: #666;

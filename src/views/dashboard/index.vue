@@ -11,7 +11,7 @@
       <el-card class="box-card-component" shadow="hover">
         <el-descriptions title="用户信息" column="2">
           <template slot="extra" />
-          <el-descriptions-item label="头像"><el-avatar shape="square" src="https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif?imageView2/1/w/80/h/80" /></el-descriptions-item>
+          <el-descriptions-item label="头像"><el-avatar shape="circle" src="https://snz04pap001files.storage.live.com/y4m-AveJOL6Bt7kQQEWolmDjUa3tezMydmpNlhGjxB464X3XQUyYZw-AqtFIfbrJfnJ02v4eb-8Jt0GwkeQZCc7WRsrQua8FG2SPSfnqJ0evyAuWpd3gFFWugncVNOzmuUVdGFiPiBaTwOCH0z_duK0hAPGQoJRAtQgB4jtpJv7lZmqqw3wQXSF7zWFCxrOvQxp?width=700&height=700&cropmode=none" /></el-descriptions-item>
           <el-descriptions-item label="用户名" style="margin-right:20px;">1978804174</el-descriptions-item>
           <el-descriptions-item label="学号" style="margin-right:20px;">2130110485</el-descriptions-item>
           <el-descriptions-item label="姓名" style="margin-right:20px;">小明</el-descriptions-item>
