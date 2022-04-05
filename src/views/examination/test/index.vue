@@ -48,9 +48,9 @@
               <el-divider />
             </el-row>
             <el-row>
-              <el-col :span="1">
-                <span id="answer-number">{{ item.content }}.</span>
+              <el-col :span="2">
                 <el-button id="listen-mark-button" size="small" :plain="!totalAnswer[item.content].mark" type="warning" icon="el-icon-star-off" circle @click="changeListenMark(item)" />
+                <span id="answer-number">{{ item.content }}.</span>
               </el-col>
               <el-col :span="22">
                 <el-radio-group v-model="totalAnswer[item.content].answer">
@@ -187,7 +187,7 @@ export default {
     return {
       activeNames: ['answers'],
       paper: PaperContent.englishExam,
-      questionIndex: 13,
+      questionIndex: 0,
       viewerText: '',
       editorText: '',
       showTips: false,
@@ -506,18 +506,20 @@ position: relative;
 }
 /*答案选择器*/
 .answer-radio{
+  position: relative;
+  top:6px;
+  left: -10px;
   margin-bottom: 20px;
 }
 /*题号*/
 #answer-number{
-  position: relative;
-  margin-left: 20px;
   font-size: 20px;
 }
 #listen-mark-button{
   position: relative;
-  left: 10px;
-  top: 10px;
+  top: -3px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 </style>
 
