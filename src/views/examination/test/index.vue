@@ -30,6 +30,7 @@
         </transition>
         <el-row type="flex" justify="center">
           <transition name="el-fade-in-linear">
+            <!--作文输入框-->
             <el-input
               v-if="showInput"
               v-model="editorText"
@@ -42,31 +43,82 @@
         </el-row>
         <!--听力题目-->
         <div v-if="showListenAnswer">
-          <el-col v-for="(item,index) in answers" :key="index" :span="24">
-            <el-divider />
-            <div>
-              <span id="answer-number">{{ item.content }} .</span>
-              <el-radio-group v-model="chooseAnswer[index]">
-                <el-radio class="answer-radio" :label="item.A">{{ item.A }}</el-radio>
-                <br>
-                <el-radio class="answer-radio" :label="item.B">{{ item.B }}</el-radio>
-                <br>
-                <el-radio class="answer-radio" :label="item.C">{{ item.C }}</el-radio>
-                <br>
-                <el-radio class="answer-radio" :label="item.D">{{ item.D }}</el-radio>
-                <br>
-              </el-radio-group>
-            </div>
-          </el-col>
+          <div v-for="(item,index) in answers" :key="index">
+            <el-row>
+              <el-divider />
+            </el-row>
+            <el-row>
+              <el-col :span="1">
+                <span id="answer-number">{{ item.content }}.</span>
+                <el-button id="listen-mark-button" size="small" :plain="!totalAnswer[item.content].mark" type="warning" icon="el-icon-star-off" circle @click="changeListenMark(item)" />
+              </el-col>
+              <el-col :span="22">
+                <el-radio-group v-model="totalAnswer[item.content].answer">
+                  <el-radio class="answer-radio" :label="item.A">{{ item.A }}</el-radio>
+                  <br>
+                  <el-radio class="answer-radio" :label="item.B">{{ item.B }}</el-radio>
+                  <br>
+                  <el-radio class="answer-radio" :label="item.C">{{ item.C }}</el-radio>
+                  <br>
+                  <el-radio class="answer-radio" :label="item.D">{{ item.D }}</el-radio>
+                  <br>
+                </el-radio-group>
+              </el-col>
+            </el-row>
+
+          </div>
+        </div>
+        <!--阅读理解-->
+        <div v-if="showReading">
+          <div v-for="(item,index) in answers" :key="index">
+            <el-row>
+              <el-divider />
+            </el-row>
+            <el-row>
+              <el-col :span="24">
+                <el-button id="reading-mark-button" size="small" :plain="!totalAnswer[item.number].mark" type="warning" icon="el-icon-star-off" circle @click="changeReadingMark(item)" />
+                <span id="reading-answer-title">{{ item.content }}</span>
+              </el-col>
+              <el-col :span="24">
+                <div>
+                  <el-radio-group v-model="totalAnswer[item.number].answer">
+                    <el-radio class="reading-choice" :label="item.A">{{ item.A }}</el-radio>
+                    <br>
+                    <el-radio class="reading-choice" :label="item.B">{{ item.B }}</el-radio>
+                    <br>
+                    <el-radio class="reading-choice" :label="item.C">{{ item.C }}</el-radio>
+                    <br>
+                    <el-radio class="reading-choice" :label="item.D">{{ item.D }}</el-radio>
+                    <br>
+                  </el-radio-group>
+                </div>
+              </el-col>
+            </el-row>
+          </div>
         </div>
         <!--十五选十-->
-        <div v-if="showBlanks" style="margin-top: 20px">
-          <el-row v-for="(item,index) in answers" :key="index">
-            <el-col id="blank-number" :span="1">
-              {{ item }}:
+        <div v-if="showBlanks" style="margin-top: 10px">
+          <el-divider style="margin-bottom: 20px" />
+          <el-row v-for="(item,key,index) in answers" :key="index">
+            <el-col id="blank-number" :span="2">
+              <el-button id="blank-mark-button" size="small" :plain="!totalAnswer[item].mark" type="warning" icon="el-icon-star-off" circle @click="changeBlankMark(item)" />
+              {{ item }}.
             </el-col>
             <el-col id="blank-answer" :span="4">
-              <el-input v-model="blankAnswer[index]" />
+              <el-input v-model="totalAnswer[item].answer" />
+            </el-col>
+          </el-row>
+        </div>
+        <!--信息匹配-->
+        <div v-if="showMatch" style="margin-top: 30px">
+          <el-divider />
+          <el-row v-for="(item,key,index) in answers" :key="index" class="match-question">
+            <el-col id="match-input" :span="1">
+              <el-input v-model="totalAnswer[key].answer" />
+            </el-col>
+            <el-col id="match-text" :span="20">
+              <el-button id="match-mark-button" size="small" :plain="!totalAnswer[key].mark" type="warning" icon="el-icon-star-off" circle @click="changeMatchMark(key)" />
+              {{ key }}. {{ item }}
             </el-col>
           </el-row>
         </div>
@@ -76,8 +128,8 @@
           <span id="footer-button">
             <transition name="el-fade-in-linear">
               <el-button-group v-if="showTips">
-                <el-button @click="previousQuestion">上一题</el-button>
-                <el-button type="primary" @click="nextQuestion">下一题</el-button>
+                <el-button type="primary" plian icon="el-icon-arrow-left" @click="previousQuestion">上一题</el-button>
+                <el-button type="primary" plian @click="nextQuestion">下一题<i class="el-icon-arrow-right el-icon--right" /></el-button>
               </el-button-group>
             </transition>
           </span>
@@ -90,14 +142,12 @@
     <el-col :span="6">
       <el-card class="question-container">
         <div>
-          <!--<el-button-group>-->
-
-          <!--</el-button-group>-->
           <el-collapse v-model="activeNames">
+            <!--答题卡-->
             <el-collapse-item title="答题卡" name="answers">
-              <el-col v-for="(item, index) in paper.question" :key="index" :span="6">
-                <el-button round class="answer-button">
-                  {{ index }}
+              <el-col v-for="(item,key, index) in totalAnswer" :key="index" :span="4">
+                <el-button :type="buttonType(item,key)" size="mini" class="answer-button" @click="jumpToQuestion(key)">
+                  {{ item.name }}
                 </el-button>
               </el-col>
             </el-collapse-item>
@@ -137,7 +187,7 @@ export default {
     return {
       activeNames: ['answers'],
       paper: PaperContent.englishExam,
-      questionIndex: 14,
+      questionIndex: 13,
       viewerText: '',
       editorText: '',
       showTips: false,
@@ -145,17 +195,22 @@ export default {
       showInput: false,
       showListenAnswer: false,
       showBlanks: false,
+      showMatch: false,
+      showReading: false,
       question: {},
       number: 0,
       answers: [],
-      chooseAnswer: [],
-      audioInfo: {},
-      blankAnswer: []
+      // chooseAnswer: {},
+      // audioInfo: {},
+      // blankAnswer: {},
+      // matchAnswer: {},
+      totalAnswer: []
     }
   },
   watch: {
     editorText: {
-      immediate: true,
+      immediate: false,
+      // 计算字数
       handler(newString) {
         newString = newString.replace(/[\u4e00-\u9fa5]+/g, ' ')
         newString = newString.replace(/\n|\r|^\s+|\s+$/gi, '')
@@ -167,8 +222,9 @@ export default {
         } else if (newString) {
           length = 1
         }
+        // console.log(this.totalAnswer[this.question.name])
+        this.totalAnswer[this.question.name].answer = this.editorText
         this.number = length
-        // console.log(length)
       }
     },
     questionIndex: {
@@ -187,9 +243,24 @@ export default {
   },
   mounted() {
     // 首次打开页面进行更新
+    this.createAnswer()
+    console.log(this.totalAnswer[1].answer)
     this.updateQuestion()
   },
   methods: {
+    createAnswer() {
+      const answer = []
+      for (let i = 0; i <= 56; i++) {
+        answer[i] = {
+          name: i,
+          answer: '',
+          mark: false
+        }
+      }
+      answer[0].name = '写作'
+      answer[56].name = '翻译'
+      this.totalAnswer = answer
+    },
     // 更新题目
     updateQuestion() {
       this.showTips = false
@@ -197,6 +268,8 @@ export default {
       this.showQuestion = false
       this.showListenAnswer = false
       this.showBlanks = false
+      this.showMatch = false
+      this.showReading = false
       // this.question = this.paper.question[this.questionIndex]
 
       switch (this.question.category) {
@@ -234,6 +307,21 @@ export default {
             this.showBlanks = true
           }, 300)
           break
+        case 'match':
+          // 信息匹配
+          this.viewerText = this.question.tip
+          setTimeout(() => {
+            this.showTips = true
+            this.showMatch = true
+          }, 300)
+          break
+        case 'reading':
+          // 阅读理解
+          this.viewerText = this.question.tip
+          setTimeout(() => {
+            this.showTips = true
+            this.showReading = true
+          }, 300)
       }
     },
     nextQuestion() {
@@ -257,18 +345,112 @@ export default {
           type: 'warning'
         })
       }
+    },
+    jumpToQuestion(key) {
+      if (key === 0) {
+        this.questionIndex = 0
+      } else if (key >= 1 && key <= 2) {
+        this.questionIndex = 2
+      } else if (key >= 3 && key <= 4) {
+        this.questionIndex = 3
+      } else if (key >= 5 && key <= 7) {
+        this.questionIndex = 4
+      } else if (key >= 8 && key <= 11) {
+        this.questionIndex = 6
+      } else if (key >= 12 && key <= 15) {
+        this.questionIndex = 7
+      } else if (key >= 16 && key <= 18) {
+        this.questionIndex = 9
+      } else if (key >= 19 && key <= 21) {
+        this.questionIndex = 10
+      } else if (key >= 22 && key <= 25) {
+        this.questionIndex = 11
+      } else if (key >= 26 && key <= 35) {
+        this.questionIndex = 13
+      } else if (key >= 36 && key <= 45) {
+        this.questionIndex = 15
+      } else if (key >= 46 && key <= 50) {
+        this.questionIndex = 17
+      } else if (key >= 51 && key <= 55) {
+        this.questionIndex = 18
+      } else if (key === 56) {
+        this.questionIndex = 19
+      }
+    },
+    buttonType(item, index) {
+      console.log('@', item)
+      if (item.mark) {
+        return 'warning'
+      } else if (item.answer !== '') {
+        return 'primary'
+      } else {
+        return ''
+      }
+    },
+    changeListenMark(item) {
+      this.totalAnswer[item.content].mark = !this.totalAnswer[item.content].mark
+    },
+    changeReadingMark(item) {
+      this.totalAnswer[item.number].mark = !this.totalAnswer[item.number].mark
+    },
+    changeBlankMark(item) {
+      this.totalAnswer[item].mark = !this.totalAnswer[item].mark
+    },
+    changeMatchMark(key) {
+      this.totalAnswer[key].mark = !this.totalAnswer[key].mark
     }
   }
 }
 </script>
 
 <style scoped>
+#match-text{
+  font-size: 18px;
+  position: relative;
+  top: -5px;
+}
+#match-mark-button{
+position: relative;
+  top: -2px;
+  margin-right: 10px;
+}
+#blank-mark-button{
+  margin-right: 10px;
+  position: relative;
+  top: -2px;
+}
+#reading-mark-button{
+  margin-left: 10px;
+  position: relative;
+  top: -3px;
+}
+/*阅读理解题干*/
+#reading-answer-title{
+  font-size: 18px;
+  margin-left: 20px;
+}
+
+.reading-choice{
+  font-size: 25px;
+  margin: 10px 10px 10px 80px;
+}
+/*信息匹配输入框*/
+#match-input{
+  position: relative;
+  top: -10px;
+  margin-right: 20px;
+}
+/*信息匹配题文字*/
+.match-question{
+  margin: 10px;
+}
+
 /*十五选十题号*/
 #blank-number{
   margin-left: 10px;
   margin-top: 10px;
   position: relative;
-  top:0px;
+  top:-5px;
   left: 5px;
   font-weight: bold;
   font-size: 1.2em;
@@ -287,7 +469,7 @@ export default {
   padding: 10px;
 }
 .header-card{
-  border-radius: 0px;
+  border-radius: 0;
 }
 .time{
   font-size: 1.5em;
@@ -329,8 +511,13 @@ export default {
 /*题号*/
 #answer-number{
   position: relative;
-  top:-65px;
-  margin-right: 20px;
+  margin-left: 20px;
+  font-size: 20px;
+}
+#listen-mark-button{
+  position: relative;
+  left: 10px;
+  top: 10px;
 }
 </style>
 
