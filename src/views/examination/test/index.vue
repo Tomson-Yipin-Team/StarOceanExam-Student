@@ -20,9 +20,11 @@
     <!--题目面板-->
     <el-col :span="18">
       <el-card class="question-container">
+        <!--听力控件-->
         <transition name="el-fade-in-linear">
           <aplayer v-if="showListenAnswer" id="audio-player" :music="audioInfo" />
         </transition>
+        <!--题目-->
         <transition name="el-fade-in-linear">
           <Viewer v-if="showTips" style="margin: 10px" :initial-value="viewerText" />
         </transition>
@@ -38,25 +40,35 @@
             />
           </transition>
         </el-row>
+        <!--听力题目-->
         <div v-if="showListenAnswer">
           <el-col v-for="(item,index) in answers" :key="index" :span="24">
             <el-divider />
-            <div class="answer-radio">
-              {{ item.content }}
-            </div>
             <div>
+              <span id="answer-number">{{ item.content }} .</span>
               <el-radio-group v-model="chooseAnswer[index]">
-                <el-radio class="answer-radio" :label="item.A" border>{{ item.A }}</el-radio>
+                <el-radio class="answer-radio" :label="item.A">{{ item.A }}</el-radio>
                 <br>
-                <el-radio class="answer-radio" :label="item.B" border>{{ item.B }}</el-radio>
+                <el-radio class="answer-radio" :label="item.B">{{ item.B }}</el-radio>
                 <br>
-                <el-radio class="answer-radio" :label="item.C" border>{{ item.C }}</el-radio>
+                <el-radio class="answer-radio" :label="item.C">{{ item.C }}</el-radio>
                 <br>
-                <el-radio class="answer-radio" :label="item.D" border>{{ item.D }}</el-radio>
+                <el-radio class="answer-radio" :label="item.D">{{ item.D }}</el-radio>
                 <br>
               </el-radio-group>
             </div>
           </el-col>
+        </div>
+        <!--十五选十-->
+        <div v-if="showBlanks" style="margin-top: 20px">
+          <el-row v-for="(item,index) in answers" :key="index">
+            <el-col id="blank-number" :span="1">
+              {{ item }}:
+            </el-col>
+            <el-col id="blank-answer" :span="4">
+              <el-input v-model="blankAnswer[index]" />
+            </el-col>
+          </el-row>
         </div>
         <!--按钮控件-->
         <div>
@@ -65,7 +77,7 @@
             <transition name="el-fade-in-linear">
               <el-button-group v-if="showTips">
                 <el-button @click="previousQuestion">上一题</el-button>
-                <el-button @click="nextQuestion">下一题</el-button>
+                <el-button type="primary" @click="nextQuestion">下一题</el-button>
               </el-button-group>
             </transition>
           </span>
@@ -125,28 +137,20 @@ export default {
     return {
       activeNames: ['answers'],
       paper: PaperContent.englishExam,
-      questionIndex: 0,
+      questionIndex: 14,
       viewerText: '',
       editorText: '',
       showTips: false,
       showQuestion: false,
       showInput: false,
       showListenAnswer: false,
-      // editorOptions:{
-      //   minHeight: '200px',
-      //   language: 'zh-CN',
-      //   useCommandShortcut: true,
-      //   usageStatistics: true,
-      //   hideModeSwitch: true,
-      //   toolbarItems: [
-      //     ['heading', 'bold', 'italic', 'strike']
-      //   ]
-      // },
+      showBlanks: false,
       question: {},
       number: 0,
       answers: [],
       chooseAnswer: [],
-      audioInfo: {}
+      audioInfo: {},
+      blankAnswer: []
     }
   },
   watch: {
@@ -164,12 +168,14 @@ export default {
           length = 1
         }
         this.number = length
-        console.log(length)
+        // console.log(length)
       }
     },
     questionIndex: {
       immediate: true,
       handler() {
+        this.question = this.paper.question[this.questionIndex]
+        this.answers = this.question.answers
         this.updateQuestion()
       }
     }
@@ -190,31 +196,45 @@ export default {
       this.showInput = false
       this.showQuestion = false
       this.showListenAnswer = false
-      this.question = this.paper.question[this.questionIndex]
-      // 写作题型
-      if (this.question.category === 'writing') {
-        this.viewerText = this.question.tip
-        setTimeout(() => {
-          this.showTips = true
-          this.showInput = true
-        }, 300)
-      } else if (this.question.category === 'tip') {
-        // 提示
-        this.viewerText = this.question.tip
-        setTimeout(() => {
-          this.showTips = true
-        }, 300)
-      } else if (this.question.category === 'listen') {
-        // 听力题
-        this.viewerText = this.question.tip
-        this.audioInfo = this.question.audioInfo
-        this.answers = this.question.answers
-        setTimeout(() => {
-          this.showTips = true
-          this.showListenAnswer = true
-        }, 300)
+      this.showBlanks = false
+      // this.question = this.paper.question[this.questionIndex]
+
+      switch (this.question.category) {
+        case 'writing':
+          // 写作题
+          this.viewerText = this.question.tip
+          setTimeout(() => {
+            this.showTips = true
+            this.showInput = true
+          }, 300)
+          break
+        case 'tip':
+          // 提示
+          this.viewerText = this.question.tip
+          setTimeout(() => {
+            this.showTips = true
+          }, 300)
+          break
+        case 'listen':
+          // 听力题
+          this.viewerText = this.question.tip
+          this.audioInfo = this.question.audioInfo
+          // this.answers = this.question.answers
+          setTimeout(() => {
+            this.showTips = true
+            this.showListenAnswer = true
+          }, 300)
+          break
+        case 'blanks':
+          // 十五选十
+          // this.answers = this.question.answers
+          this.viewerText = this.question.tip
+          setTimeout(() => {
+            this.showTips = true
+            this.showBlanks = true
+          }, 300)
+          break
       }
-      // console.log(this.question)
     },
     nextQuestion() {
       if (this.questionIndex < this.paper.question.length - 1) {
@@ -243,6 +263,20 @@ export default {
 </script>
 
 <style scoped>
+/*十五选十题号*/
+#blank-number{
+  margin-left: 10px;
+  margin-top: 10px;
+  position: relative;
+  top:0px;
+  left: 5px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+/*十五选十输入框*/
+#blank-answer{
+  margin-bottom: 20px;
+}
 #tips{
   float: right;
   transform: translate(-00%,-25%);
@@ -290,7 +324,13 @@ export default {
 }
 /*答案选择器*/
 .answer-radio{
-  margin: 10px;
+  margin-bottom: 20px;
+}
+/*题号*/
+#answer-number{
+  position: relative;
+  top:-65px;
+  margin-right: 20px;
 }
 </style>
 
