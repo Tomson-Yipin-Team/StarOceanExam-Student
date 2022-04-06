@@ -25,9 +25,12 @@
           <aplayer v-if="showListenAnswer" id="audio-player" :music="audioInfo" />
         </transition>
         <!--题目-->
-        <transition name="el-fade-in-linear">
-          <Viewer v-if="showTips" style="margin: 10px" :initial-value="viewerText" />
-        </transition>
+        <div ref="tipsViewer" class="pop-tools-parent">
+          <transition name="el-fade-in-linear">
+            <Viewer v-if="showTips" style="margin: 10px" :initial-value="viewerText" />
+          </transition>
+          <div pop-tools="删除" />
+        </div>
         <el-row type="flex" justify="center">
           <transition name="el-fade-in-linear">
             <!--作文输入框-->
@@ -152,18 +155,54 @@
               </el-col>
             </el-collapse-item>
             <el-collapse-item title="工具箱" name="tools">
-              <el-button>铅笔</el-button>
-              <br>
-              <el-button>荧光笔批注</el-button>
-              <br>
-              <el-button>文本框</el-button>
-              <br>
+              <div style="margin: 5px">
+                批注开关
+                <el-switch
+                  v-model="showHighLighter"
+                />
+              </div>
+              <div v-if="showHighLighter">
+                <el-button-group style="margin: 5px">
+                  <el-button @click="openCommentDrawer">显示批注</el-button>
+                  <el-button @click="clearHighLighter">清除所有</el-button>
+                </el-button-group>
+              </div>
+              <div v-if="showHighLighter">
+                <el-radio-group v-model="toolsCategory" style="margin: 5px">
+                  <el-radio-button label="pencil">铅笔</el-radio-button>
+                  <el-radio-button label="pen-green">绿色荧光</el-radio-button>
+                  <el-radio-button label="pen-yellow">黄色荧光</el-radio-button>
+                  <el-radio-button label="pen-blue">蓝色荧光</el-radio-button>
+                </el-radio-group>
+              </div>
+
               <el-button>时钟计时</el-button>
             </el-collapse-item>
           </el-collapse>
         </div>
       </el-card>
     </el-col>
+    <!--批注-->
+    <el-drawer
+      title="批注内容"
+      :visible.sync="showCommentDrawer"
+      :with-header="false"
+    >
+      <div v-for="(item,index) in highLighterSource" :key="index">
+        <el-row class="comment">
+          <div class="comment-text">
+            <span class="comment-title">题目:</span>
+            {{ item.name }}
+          </div>
+          <div class="comment-text">
+            <span class="comment-title">批注: </span>
+            {{ item.text }}
+          </div>
+          <el-button icon="el-icon-delete" size="mini" @click="deleteHighLighter(item,index)" />
+        </el-row>
+      </div>
+    </el-drawer>
+
   </div>
 </template>
 
@@ -175,6 +214,8 @@ import '@toast-ui/editor/dist/toastui-editor.css'
 import { Viewer } from '@toast-ui/vue-editor'
 import '@toast-ui/editor/dist/i18n/zh-cn.js'
 import APlayer from 'vue-aplayer'
+import Highlighter from 'web-highlighter'
+const highlighter = new Highlighter()
 
 export default {
   name: 'Index',
@@ -197,17 +238,44 @@ export default {
       showBlanks: false,
       showMatch: false,
       showReading: false,
+      showHighLighter: false,
       question: {},
       number: 0,
+      highLighterSource: [],
       answers: [],
+      questionName: PaperContent.qusitonName,
       // chooseAnswer: {},
       // audioInfo: {},
       // blankAnswer: {},
       // matchAnswer: {},
-      totalAnswer: []
+      totalAnswer: [],
+      showCommentDrawer: false,
+      toolsCategory: 'pencil'
     }
   },
   watch: {
+    // 切换画笔
+    toolsCategory: {
+      immediate: true,
+      handler(newValue) {
+        highlighter.setOption({
+          style: {
+            className: newValue
+          }
+        })
+      }
+    },
+    // 显示高亮
+    showHighLighter: {
+      immediate: false,
+      handler(newValue) {
+        if (newValue) {
+          highlighter.run()
+        } else {
+          highlighter.stop()
+        }
+      }
+    },
     editorText: {
       immediate: false,
       // 计算字数
@@ -246,8 +314,36 @@ export default {
     this.createAnswer()
     console.log(this.totalAnswer[1].answer)
     this.updateQuestion()
+    this.initHighLighter()
   },
   methods: {
+    initHighLighter() {
+      highlighter
+        // 鼠标移入触发
+        .on('selection:hover', ({ id }) => {
+          highlighter.addClass('highlight-wrap-hover', id)
+          // console.log(highlighter.getDoms(id))
+        })
+        // 鼠标移出触发
+        .on('selection:hover-out', ({ id }) => {
+          highlighter.removeClass('highlight-wrap-hover', id)
+        })
+        // 创建触发
+        .on('selection:create', ({ sources }) => {
+          sources = sources.map(hs => ({ hs }))
+          console.log(sources)
+          this.highLighterSource.push(sources[0].hs)
+          this.highLighterSource[this.highLighterSource.length - 1].name = this.questionName[this.questionIndex]
+        })
+        // 鼠标点击触发
+        .on('selection:click', ({ id }) => {
+          this.currId = id
+        })
+    },
+    // // 高亮批注
+    // openHighLighter() {
+    //   // highlighter.run()
+    // },
     createAnswer() {
       const answer = []
       for (let i = 0; i <= 56; i++) {
@@ -377,8 +473,9 @@ export default {
         this.questionIndex = 19
       }
     },
+    // 答题卡颜色控制
     buttonType(item, index) {
-      console.log('@', item)
+      // console.log('@', item)
       if (item.mark) {
         return 'warning'
       } else if (item.answer !== '') {
@@ -387,23 +484,55 @@ export default {
         return ''
       }
     },
+    // 听力题目标记
     changeListenMark(item) {
       this.totalAnswer[item.content].mark = !this.totalAnswer[item.content].mark
     },
+    // 阅读题标记
     changeReadingMark(item) {
       this.totalAnswer[item.number].mark = !this.totalAnswer[item.number].mark
     },
+    // 十五选十标记
     changeBlankMark(item) {
       this.totalAnswer[item].mark = !this.totalAnswer[item].mark
     },
+    // 信息匹配标记
     changeMatchMark(key) {
       this.totalAnswer[key].mark = !this.totalAnswer[key].mark
+    },
+    // 批注列表
+    openCommentDrawer() {
+      this.showCommentDrawer = true
+    },
+    // 清除标记区域
+    deleteHighLighter(item, index) {
+      highlighter.remove(item.id)
+      this.highLighterSource.splice(index, 1)
+    },
+    clearHighLighter() {
+      highlighter.dispose()
+      this.highLighterSource = []
     }
   }
 }
 </script>
 
 <style scoped>
+.comment-title{
+color: #6c5ce7;
+}
+
+.comment-text{
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.comment{
+  margin: 10px;
+  padding: 10px;
+  border-bottom: #ebeef5 solid 1px;
+}
+
 #match-text{
   font-size: 18px;
   position: relative;
@@ -524,6 +653,27 @@ position: relative;
 </style>
 
 <style>
+.pencil{
+  cursor: pointer;
+  text-decoration:underline;
+
+}
+.pen-green{
+    background: #99FFCD;
+  cursor: pointer;
+
+}
+.pen-yellow{
+    background: #ffe867;
+  cursor: pointer;
+
+}
+.pen-blue{
+   background: #3deeff;
+    cursor: pointer;
+
+ }
+
 /*覆盖Viewer的样式*/
 .toastui-editor-contents {
   margin: 0;
