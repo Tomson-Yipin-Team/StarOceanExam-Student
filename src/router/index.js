@@ -42,23 +42,27 @@ export const constantRoutes = [
     component: () => import('@/views/register/index'),
     hidden: true
   },
-
+  {
+    path: '/forget',
+    component: () => import('@/views/forget/index'),
+    hidden: true
+  },
   {
     path: '/404',
     component: () => import('@/views/404'),
     hidden: true
   },
-
+  // 考试页面
   {
     path: '/exam',
-    hidden: true,
-    component: () => import('@/views/ceshi/1/index')
+    hidden: false,
+    component: () => import('@/views/examination/test/index.vue')
   },
-
+  // 成绩分析页面
   {
-    path: '/cjfx',
+    path: '/analysis-detail',
     hidden: true,
-    component: () => import('@/views/nested/menu1/menu1-1/ckxq.vue')
+    component: () => import('@/views/analyse/detail/index')
   },
 
   {
@@ -74,22 +78,22 @@ export const constantRoutes = [
   },
 
   {
-    path: '/example',
+    path: '/examination',
     component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
+    redirect: '/examination/wait',
+    name: 'Exam',
     meta: { title: '考试中心', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
+        path: 'wait',
+        name: 'Wait',
+        component: () => import('@/views/examination/wait/index'),
         meta: { title: '待参加的考试', icon: 'table' }
       },
       {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
+        path: 'finish',
+        name: 'Finish',
+        component: () => import('@/views/examination/finish/index'),
         meta: { title: '已结束的考试', icon: 'tree' }
       }
     ]
@@ -131,7 +135,7 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       name: 'Class',
-      component: () => import('@/views/nested/menu1/index'),
+      component: () => import('@/views/classroom/index'),
       meta: { title: '我的班级', icon: 'el-icon-chat-dot-round' }
     }]
   },
@@ -141,7 +145,7 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       name: 'Analysis',
-      component: () => import('@/views/nested/menu1/menu1-1/index'),
+      component: () => import('@/views/analyse/index'),
       meta: { title: '成绩分析', icon: 'el-icon-s-data' }
     }]
   },
@@ -151,7 +155,7 @@ export const constantRoutes = [
     children: [{
       path: 'index',
       name: 'Information',
-      component: () => import('@/views/nested/personal/index'),
+      component: () => import('@/views/personal/index'),
       meta: { title: '基本资料', icon: 'el-icon-s-custom' }
     }]
   }
@@ -164,13 +168,18 @@ export const asyncRoutes = [
     children: [
       {
         path: 'admin',
-        component: () => import('@/views/ceshi/1'),
+        component: () => import('@/views/personal/index'),
         meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['zhu'] }
       },
       {
         path: 'zhu',
+<<<<<<< HEAD
         component: () => import('@/views/ceshi/2'),
         meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['admin'] }
+=======
+        component: () => import('@/views/personal/index'),
+        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['zhu'] }
+>>>>>>> 1629345bc1345d4354cde47edaf747b11f63b7fe
       }
     ]
   },

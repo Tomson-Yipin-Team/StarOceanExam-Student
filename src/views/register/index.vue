@@ -1,8 +1,8 @@
 <template>
   <div class="register-container">
-    <article class="header">
+    <article class="header-card">
       <header>
-        <el-avatar icon="el-icon-user-solid" shape="circle" />
+        <el-avatar src="https://snz04pap001files.storage.live.com/y4m-AveJOL6Bt7kQQEWolmDjUa3tezMydmpNlhGjxB464X3XQUyYZw-AqtFIfbrJfnJ02v4eb-8Jt0GwkeQZCc7WRsrQua8FG2SPSfnqJ0evyAuWpd3gFFWugncVNOzmuUVdGFiPiBaTwOCH0z_duK0hAPGQoJRAtQgB4jtpJv7lZmqqw3wQXSF7zWFCxrOvQxp?width=700&height=700&cropmode=none" shape="circle" />
         <span class="login">
           <em class="bold">已有账号？</em>
           <a href="/login">
@@ -173,6 +173,10 @@ export default {
 
     // 用户注册
     register: function() {
+      function encrypt(pwd) {
+        console.log('')
+      }
+
       this.$refs['ruleForm'].validate((valid) => {
         if (valid) {
           const user = {
@@ -261,7 +265,7 @@ $light_gray: #eee;
   background-color: $bg;
   overflow: hidden;
 
-  .header {
+  .header-card {
     border-bottom: 2px solid rgb(235, 232, 232);
     min-width: 980px;
     color: #666;

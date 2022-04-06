@@ -1,102 +1,78 @@
 <template>
   <div class="app-container">
-    <el-table
-      :data="tableData1"
-      style="width: 100%"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column
-        label="考试名称"
-        width="360"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-collection" />
-          <span style="margin-left: 10px">{{ scope.row.address }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="参考人数"
-        width="120"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-user" />
-          <span style="margin-left: 10px">{{ scope.row.many }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="日期"
-        width="180"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span style="margin-left: 10px">{{ scope.row.date }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="状态"
-        width="80"
-      >
-        <template slot-scope="scope">
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium" type="success">{{ scope.row.name }}</el-tag>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="primary"
-            @click="handleEdit1(scope.$index, scope.row)"
-          >查看成绩</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+    <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
+
+    <el-tree
+      ref="tree2"
+      :data="data2"
+      :props="defaultProps"
+      :filter-node-method="filterNode"
+      class="filter-tree"
+      default-expand-all
+    />
+
   </div>
 </template>
 
 <script>
 export default {
+
   data() {
     return {
-      tableData1: [{
-        date: '2021-07-02-08:00',
-        name: '已结束',
-        many: '126',
-        address: '南通大学高等数学(一)期末考试',
-        fraction: '95'
+      filterText: '',
+      data2: [{
+        id: 1,
+        label: 'Level one 1',
+        children: [{
+          id: 4,
+          label: 'Level two 1-1',
+          children: [{
+            id: 9,
+            label: 'Level three 1-1-1'
+          }, {
+            id: 10,
+            label: 'Level three 1-1-2'
+          }]
+        }]
       }, {
-        date: '2021-07-02-10:30',
-        name: '已结束',
-        many: '67',
-        address: '南通大学大学英语(一)期末考试',
-        fraction: '86'
+        id: 2,
+        label: 'Level one 2',
+        children: [{
+          id: 5,
+          label: 'Level two 2-1'
+        }, {
+          id: 6,
+          label: 'Level two 2-2'
+        }]
       }, {
-        date: '2021-07-03-14:00',
-        name: '已结束',
-        many: '128',
-        address: '南通大学大学物理(一)期末考试',
-        fraction: '92'
-      }, {
-        date: '2021-07-03-18:30',
-        name: '已结束',
-        many: '65',
-        address: '南通大学程序设计基础期末考试',
-        fraction: '89'
-      }]
+        id: 3,
+        label: 'Level one 3',
+        children: [{
+          id: 7,
+          label: 'Level two 3-1'
+        }, {
+          id: 8,
+          label: 'Level two 3-2'
+        }]
+      }],
+      defaultProps: {
+        children: 'children',
+        label: 'label'
+      }
     }
   },
+  watch: {
+    filterText(val) {
+      this.$refs.tree2.filter(val)
+    }
+  },
+
   methods: {
-    handleEdit1(index, row) {
-      this.$alert('该学科分数为:' + row.fraction, '', {
-        confirmButtonText: '确定',
-        callback: action => {
-        }
-      })
+    filterNode(value, data) {
+      if (!value) return true
+      return data.label.indexOf(value) !== -1
     }
   }
 }
 </script>
+
