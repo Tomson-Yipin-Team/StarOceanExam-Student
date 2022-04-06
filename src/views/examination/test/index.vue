@@ -25,9 +25,11 @@
           <aplayer v-if="showListenAnswer" id="audio-player" :music="audioInfo" />
         </transition>
         <!--题目-->
-        <transition name="el-fade-in-linear">
-          <Viewer v-if="showTips" style="margin: 10px" :initial-value="viewerText" />
-        </transition>
+        <div ref="tipsViewer">
+          <transition name="el-fade-in-linear">
+            <Viewer v-if="showTips" style="margin: 10px" :initial-value="viewerText" />
+          </transition>
+        </div>
         <el-row type="flex" justify="center">
           <transition name="el-fade-in-linear">
             <!--作文输入框-->
@@ -152,18 +154,42 @@
               </el-col>
             </el-collapse-item>
             <el-collapse-item title="工具箱" name="tools">
-              <el-button>铅笔</el-button>
+              批注开关
+              <el-switch
+                v-model="showHighLighter"
+              />
               <br>
-              <el-button>荧光笔批注</el-button>
+              <el-button @click="openHighLighter">荧光笔批注</el-button>
               <br>
-              <el-button>文本框</el-button>
+              <el-button @click="openCommentDrawer">打开批注</el-button>
               <br>
               <el-button>时钟计时</el-button>
             </el-collapse-item>
+            <el-collapse-item title="批注" name="comment" />
           </el-collapse>
         </div>
       </el-card>
     </el-col>
+    <!--批注-->
+    <el-drawer
+      title="批注内容"
+      :visible.sync="showCommentDrawer"
+      :with-header="false"
+    >
+      <div v-for="(item,index) in highLighterSource" :key="index">
+        <el-row class="comment">
+          <div class="comment-text">
+            <span class="comment-title">题目:</span>
+            {{ item.name }}
+          </div>
+          <div class="comment-text">
+            <span class="comment-title">批注: </span>
+            {{ item.text }}
+          </div>
+        </el-row>
+      </div>
+    </el-drawer>
+
   </div>
 </template>
 
@@ -175,6 +201,8 @@ import '@toast-ui/editor/dist/toastui-editor.css'
 import { Viewer } from '@toast-ui/vue-editor'
 import '@toast-ui/editor/dist/i18n/zh-cn.js'
 import APlayer from 'vue-aplayer'
+import Highlighter from 'web-highlighter'
+const highlighter = new Highlighter()
 
 export default {
   name: 'Index',
@@ -197,17 +225,31 @@ export default {
       showBlanks: false,
       showMatch: false,
       showReading: false,
+      showHighLighter: false,
       question: {},
       number: 0,
+      highLighterSource: [],
       answers: [],
+      questionName: PaperContent.qusitonName,
       // chooseAnswer: {},
       // audioInfo: {},
       // blankAnswer: {},
       // matchAnswer: {},
-      totalAnswer: []
+      totalAnswer: [],
+      showCommentDrawer: false
     }
   },
   watch: {
+    showHighLighter: {
+      immediate: false,
+      handler(newValue) {
+        if (newValue) {
+          highlighter.run()
+        } else {
+          highlighter.stop()
+        }
+      }
+    },
     editorText: {
       immediate: false,
       // 计算字数
@@ -246,8 +288,35 @@ export default {
     this.createAnswer()
     console.log(this.totalAnswer[1].answer)
     this.updateQuestion()
+    this.initHighLighter()
   },
   methods: {
+    initHighLighter() {
+      highlighter
+        // 鼠标移入触发
+        .on('selection:hover', ({ id }) => {
+          highlighter.addClass('highlight-wrap-hover', id)
+        })
+        // 鼠标移出触发
+        .on('selection:hover-out', ({ id }) => {
+          highlighter.removeClass('highlight-wrap-hover', id)
+        })
+        // 创建触发
+        .on('selection:create', ({ sources }) => {
+          sources = sources.map(hs => ({ hs }))
+          console.log(sources)
+          this.highLighterSource.push(sources[0].hs)
+          this.highLighterSource[this.highLighterSource.length - 1].name = this.questionName[this.questionIndex]
+        })
+        // 鼠标点击触发
+        .on('selection:click', ({ id }) => {
+          this.currId = id
+        })
+    },
+    // 高亮批注
+    openHighLighter() {
+      // highlighter.run()
+    },
     createAnswer() {
       const answer = []
       for (let i = 0; i <= 56; i++) {
@@ -377,8 +446,9 @@ export default {
         this.questionIndex = 19
       }
     },
+    // 答题卡颜色控制
     buttonType(item, index) {
-      console.log('@', item)
+      // console.log('@', item)
       if (item.mark) {
         return 'warning'
       } else if (item.answer !== '') {
@@ -387,23 +457,45 @@ export default {
         return ''
       }
     },
+    // 听力题目标记
     changeListenMark(item) {
       this.totalAnswer[item.content].mark = !this.totalAnswer[item.content].mark
     },
+    // 阅读题标记
     changeReadingMark(item) {
       this.totalAnswer[item.number].mark = !this.totalAnswer[item.number].mark
     },
+    // 十五选十标记
     changeBlankMark(item) {
       this.totalAnswer[item].mark = !this.totalAnswer[item].mark
     },
+    // 信息匹配标记
     changeMatchMark(key) {
       this.totalAnswer[key].mark = !this.totalAnswer[key].mark
+    },
+    openCommentDrawer() {
+      this.showCommentDrawer = true
     }
   }
 }
 </script>
 
 <style scoped>
+.comment-title{
+color: #6c5ce7;
+}
+
+.comment-text{
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.comment{
+  margin: 10px;
+  padding: 10px;
+  border-bottom: #ebeef5 solid 1px;
+}
+
 #match-text{
   font-size: 18px;
   position: relative;

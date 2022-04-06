@@ -189,11 +189,12 @@ $light_gray:#eee;
   // width: 100%;
   // background-color: $bg;
   // overflow: hidden;
-  background: url("../../assets/Login_background/Back_ground.png");
-  width:100%;
+  background: url("https://lsky-picture.stdcdn.com/uploads/2022/04/2e9cb67423cf581b0486a430511feeb2.jpg");
+  background-size: cover;
+  //width:100%;
   height:100%;
-  position:fixed;
-  background-size:100% 100%;
+  //position:fixed;
+  //background-size:100% 100%;
 
   .login-form {
     position: relative;
