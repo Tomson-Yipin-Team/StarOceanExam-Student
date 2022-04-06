@@ -1,114 +1,76 @@
 <template>
-  <div :class="className" :style="{height:height,width:width}" />
+<el-descriptions class="margin-top" title="高等数学（一）" :column="3" :size="size" border>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-user" />
+            人数
+          </template>
+          126
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-user" />
+            授课老师
+          </template>
+          宋浩
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-time" />
+            考试时间
+          </template>
+          2022-07-02-08:00
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-tickets" />
+            考试状态
+          </template>
+          <el-tag size="small">待考式</el-tag>
+        </el-descriptions-item>
+        <el-descriptions-item>
+          <template slot="label">
+            <i class="el-icon-office-building" />
+            考试地点
+          </template>
+          南通大学3号教学楼206室
+        </el-descriptions-item>
+        
+      </el-descriptions>
+      </template>
+      <template12>
+<el-menu
+  :default-active="activeIndex2"
+  class="el-menu-demo"
+  mode="horizontal"
+  @select="handleSelect"
+  background-color="#545c64"
+  text-color="#fff"
+  active-text-color="#ffd04b">
+  <el-menu-item index="1">班级成员</el-menu-item>
+  <el-menu-item index="2">班级信息</el-menu-item>
+
+</el-menu>
 </template>
-
-<script>
-import * as echarts from 'echarts'
-require('echarts/theme/macarons') // echarts theme
-import resize from './mixins/resize'
-
-const animationDuration = 1000
-
-export default {
-  mixins: [resize],
-  props: {
-    className: {
-      type: String,
-      default: 'chart'
-    },
-    width: {
-      type: String,
-      default: '100%'
-    },
-    height: {
-      type: String,
-      default: '300px'
-    }
-  },
-  data() {
-    return {
-      chart: null
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      this.initChart()
-    })
-  },
-  beforeDestroy() {
-    if (!this.chart) {
-      return
-    }
-    this.chart.dispose()
-    this.chart = null
-  },
-  methods: {
-    initChart() {
-      this.chart = echarts.init(this.$el, 'macarons')
-
-      this.chart.setOption({
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: { // 坐标轴指示器，坐标轴触发有效
-            type: 'shadow' // 默认为直线，可选为：'line' | 'shadow'
-          }
-        },
-        radar: {
-          radius: '66%',
-          center: ['50%', '42%'],
-          splitNumber: 8,
-          splitArea: {
-            areaStyle: {
-              color: 'rgba(127,95,132,.3)',
-              opacity: 1,
-              shadowBlur: 45,
-              shadowColor: 'rgba(0,0,0,.5)',
-              shadowOffsetX: 0,
-              shadowOffsetY: 15
-            }
-          },
-          indicator: [
-            { name: '填空题', max: 40 },
-            { name: '选择题', max: 50 },
-            { name: '作文', max: 60 }
-
-          ]
-        },
-        legend: {
-          left: 'center',
-          bottom: '10',
-          data: ['你的得分', '平均得分', '最高得分']
-        },
-        series: [{
-          type: 'radar',
-          symbolSize: 0,
-          areaStyle: {
-            normal: {
-              shadowBlur: 13,
-              shadowColor: 'rgba(0,0,0,.2)',
-              shadowOffsetX: 0,
-              shadowOffsetY: 10,
-              opacity: 1
-            }
-          },
-          data: [
-            {
-              value: [38, 50, 54],
-              name: '最高得分'
-            },
-            {
-              value: [28, 40, 45],
-              name: '你的得分'
-            },
-            {
-              value: [20, 30, 47],
-              name: '平均得分'
-            }
-          ],
-          animationDuration: animationDuration
-        }]
-      })
-    }
+<style>
+  .text {
+    font-size: 14px;
   }
-}
-</script>
+
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 240px;
+  }
+</style>

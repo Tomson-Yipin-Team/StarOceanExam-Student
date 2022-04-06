@@ -1,7 +1,6 @@
 <template>
-
-  <el-row style="margin:10px;" :gutter="10">
-    <el-col :span="3">
+  <el-row style="margin:10px;" :gutter="5">
+    <el-col :span="2">
       <el-card class="box-card" shadow="hover">
         <div slot="header" class="clearfix">
           <span>高等数学（一）</span>
@@ -12,7 +11,7 @@
         </div>
       </el-card>
     </el-col>
-    <el-col :span="3" push="2">
+    <el-col :span="2" push="2">
       <el-card class="box-card" shadow="hover">
         <div slot="header" class="clearfix">
           <span>大学英语（一）</span>
@@ -23,7 +22,7 @@
         </div>
       </el-card>
     </el-col>
-    <el-col :span="3" push="4">
+    <el-col :span="2" push="4">
       <el-card class="box-card" shadow="hover">
         <div slot="header" class="clearfix">
           <span>大学物理（一）</span>
@@ -34,7 +33,7 @@
         </div>
       </el-card>
     </el-col>
-    <el-col :span="3" push="6">
+    <el-col :span="2" push="6">
       <el-card class="box-card" shadow="hover">
         <div slot="header" class="clearfix">
           <span>程序设计基础</span>

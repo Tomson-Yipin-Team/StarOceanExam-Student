@@ -170,7 +170,7 @@ export const asyncRoutes = [
       {
         path: 'zhu',
         component: () => import('@/views/ceshi/2'),
-        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['zhu'] }
+        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['admin'] }
       }
     ]
   },
