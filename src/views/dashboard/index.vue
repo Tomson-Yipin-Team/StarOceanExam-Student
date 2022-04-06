@@ -26,116 +26,122 @@
         </el-descriptions>
       </el-card>
     </el-row>
-    <el-table
-      :data="tableData"
-      style="width: 100%"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column
-        label="考试名称"
-        width="360"
+    <!--考试信息-->
+    <el-card class="exam-table" :body-style="{padding:'0px'}" shadow="hover">
+      <el-table
+        :data="tableData"
+        style="width: 100%"
+        element-loading-text="Loading"
+        border
+        fit
+        highlight-current-row
       >
-        <template slot-scope="scope">
-          <i class="el-icon-collection" />
-          <span style="margin-left: 10px">{{ scope.row.address }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="参考人数"
-        width="120"
+        <el-table-column
+          label="考试名称"
+          width="360"
+        >
+          <template slot-scope="scope">
+            <i class="el-icon-collection" />
+            <span style="margin-left: 10px">{{ scope.row.address }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="参考人数"
+          width="120"
+        >
+          <template slot-scope="scope">
+            <i class="el-icon-user" />
+            <span style="margin-left: 10px">{{ scope.row.many }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="日期"
+          width="180"
+        >
+          <template slot-scope="scope">
+            <i class="el-icon-time" />
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          width="80"
+        >
+          <template slot-scope="scope">
+            <div slot="reference" class="name-wrapper">
+              <el-tag size="medium">{{ scope.row.name }}</el-tag>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="handleEdit(scope.$index, scope.row)"
+            >参加考试</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
+    <!--成绩表格-->
+    <el-card class="score-table" :body-style="{padding:'0px'}" shadow="hover">
+      <el-table
+        :data="tableData1"
+        style="width: 100%"
+        element-loading-text="Loading"
+        border
+        fit
+        highlight-current-row
       >
-        <template slot-scope="scope">
-          <i class="el-icon-user" />
-          <span style="margin-left: 10px">{{ scope.row.many }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="日期"
-        width="180"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span style="margin-left: 10px">{{ scope.row.date }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="状态"
-        width="80"
-      >
-        <template slot-scope="scope">
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.name }}</el-tag>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="primary"
-            @click="handleEdit(scope.$index, scope.row)"
-          >参加考试</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <el-table
-      :data="tableData1"
-      style="width: 100%"
-      element-loading-text="Loading"
-      border
-      fit
-      highlight-current-row
-    >
-      <el-table-column
-        label="考试名称"
-        width="360"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-collection" />
-          <span style="margin-left: 10px">{{ scope.row.address }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="参考人数"
-        width="120"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-user" />
-          <span style="margin-left: 10px">{{ scope.row.many }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="日期"
-        width="180"
-      >
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span style="margin-left: 10px">{{ scope.row.date }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column
-        label="状态"
-        width="80"
-      >
-        <template slot-scope="scope">
-          <div slot="reference" class="name-wrapper">
-            <el-tag size="medium" type="success">{{ scope.row.name }}</el-tag>
-          </div>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="primary"
-            @click="handleEdit1(scope.$index, scope.row)"
-          >查看成绩</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
+        <el-table-column
+          label="考试名称"
+          width="360"
+        >
+          <template slot-scope="scope">
+            <i class="el-icon-collection" />
+            <span style="margin-left: 10px">{{ scope.row.address }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="参考人数"
+          width="120"
+        >
+          <template slot-scope="scope">
+            <i class="el-icon-user" />
+            <span style="margin-left: 10px">{{ scope.row.many }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="日期"
+          width="180"
+        >
+          <template slot-scope="scope">
+            <i class="el-icon-time" />
+            <span style="margin-left: 10px">{{ scope.row.date }}</span>
+          </template>
+        </el-table-column>
+        <el-table-column
+          label="状态"
+          width="80"
+        >
+          <template slot-scope="scope">
+            <div slot="reference" class="name-wrapper">
+              <el-tag size="medium" type="success">{{ scope.row.name }}</el-tag>
+            </div>
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              type="primary"
+              @click="handleEdit1(scope.$index, scope.row)"
+            >查看成绩</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </el-card>
   </div>
 </template>
 <style>
@@ -251,5 +257,15 @@ export default {
     font-size: 30px;
     line-height: 46px;
   }
+}
+
+.exam-table{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: 0px;
+}
+.score-table{
+  margin-top: 10px;
+  border: 0px;
 }
 </style>
