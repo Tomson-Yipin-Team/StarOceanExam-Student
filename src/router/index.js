@@ -168,8 +168,8 @@ export const asyncRoutes = [
     children: [
       {
         path: 'admin',
-        component: () => import('@/views/personal/index'),
-        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['zhu'] }
+        component: () => import('@/views/ceshi/1/index'),
+        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
       },
       {
         path: 'zhu',

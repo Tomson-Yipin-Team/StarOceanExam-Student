@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div class="container">
     <el-alert
       title="通知:请考生尽快完成考试。"
       type="warning"
@@ -7,26 +7,24 @@
       show-icon
       :closable="false"
     />
-    <el-row style="margin:0px;" :gutter="32">
-      <el-card class="box-card-component" shadow="hover">
-        <el-descriptions title="用户信息" column="2">
-          <template slot="extra" />
-          <el-descriptions-item label="头像"><el-avatar shape="circle" src="https://snz04pap001files.storage.live.com/y4m-AveJOL6Bt7kQQEWolmDjUa3tezMydmpNlhGjxB464X3XQUyYZw-AqtFIfbrJfnJ02v4eb-8Jt0GwkeQZCc7WRsrQua8FG2SPSfnqJ0evyAuWpd3gFFWugncVNOzmuUVdGFiPiBaTwOCH0z_duK0hAPGQoJRAtQgB4jtpJv7lZmqqw3wQXSF7zWFCxrOvQxp?width=700&height=700&cropmode=none" /></el-descriptions-item>
-          <el-descriptions-item label="用户名" style="margin-right:20px;">1978804174</el-descriptions-item>
-          <el-descriptions-item label="学号" style="margin-right:20px;">2130110485</el-descriptions-item>
-          <el-descriptions-item label="姓名" style="margin-right:20px;">小明</el-descriptions-item>
-          <el-descriptions-item label="邮箱" style="margin-right:20px;">1978804174@qq.com</el-descriptions-item>
-          <span style="margin-right:20px;" />
-          <el-descriptions-item label="性别" style="margin-right:20px;">男</el-descriptions-item>
-          <el-descriptions-item label="状态" style="margin-right:20px;">
-            <el-tag size="small" style="margin-right:20px;">在校</el-tag>
-          </el-descriptions-item>
-          <el-descriptions-item label="学院" style="margin-right:20px;">信息科学技术学院</el-descriptions-item>
-          <el-descriptions-item label="居住地" style="margin-right:20px;">贵州省遵义市正安县</el-descriptions-item>
-        </el-descriptions>
-      </el-card>
-    </el-row>
+  <div>
+    <el-card>
+      <template slot="header">
+        <!--标题-->
+        <span>
+          已加入的班级
+        </span>
+        <el-button type="text" class="header-button">加入新的班级</el-button>
+      </template>
+      <el-row :gutter="20">
+        <el-col v-for="(item,index) in classrooms" :key="index" :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
+          <Class :class-info="item" class="class-card" />
+        </el-col>
+      </el-row>
+    </el-card>
+  </div>
     <!--考试信息-->
+    <div>
     <el-card class="exam-table" :body-style="{padding:'0px'}" shadow="hover">
       <el-table
         :data="tableData"
@@ -84,6 +82,7 @@
         </el-table-column>
       </el-table>
     </el-card>
+    </div>
     <!--成绩表格-->
     <el-card class="score-table" :body-style="{padding:'0px'}" shadow="hover">
       <el-table
@@ -144,15 +143,35 @@
     </el-card>
   </div>
 </template>
+<style scoped>
+.container{
+  margin:20px
+}
+.header-button{
+  float:right;
+  padding: 2px;
+}
+.class-card{
+  margin-bottom: 20px;
+}
+</style>
+
 <style>
 .el-alert{
 		margin-bottom:20px;
 	}
 </style>
 <script>
+import Class from '@/views/classroom/components/Class'
+import ClassInfo from '@/api/class-info'
 export default {
+  name: 'Index',
+  components: {
+    Class
+  },
   data() {
     return {
+      classrooms: ClassInfo.classrooms,
       tableData1: [{
         date: '2021-07-02-08:00',
         name: '已结束',
