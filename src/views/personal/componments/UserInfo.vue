@@ -50,7 +50,7 @@ export default {
       edit: false,
       form: {
         name: 'wxjjuju0322@gmail.com',
-        realName: '汪星聚',
+        realName: '小明',
         nickname: 'Zerolouis',
         birthday: '2022-03-22',
         password: '12345567',
