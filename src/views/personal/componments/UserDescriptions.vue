@@ -2,10 +2,10 @@
   <div class="container">
     <el-descriptions class="description" :column="1" border :content-style="descriptionsPram.CS" :label-style="descriptionsPram.LS">
       <el-descriptions-item label="用户名">wxjjuju0322@gmail.com</el-descriptions-item>
-      <el-descriptions-item label="姓名" >小明</el-descriptions-item>
-      <el-descriptions-item label="昵称" >Zerolouis</el-descriptions-item>
-      <el-descriptions-item label="学校" >南通大学</el-descriptions-item>
-      <el-descriptions-item label="学院" >信息科学技术学院</el-descriptions-item>
+      <el-descriptions-item label="姓名">小明</el-descriptions-item>
+      <el-descriptions-item label="昵称">Zerolouis</el-descriptions-item>
+      <el-descriptions-item label="学校">南通大学</el-descriptions-item>
+      <el-descriptions-item label="学院">信息科学技术学院</el-descriptions-item>
       <el-descriptions-item label="状态" style="margin-right:20px;"><el-tag size="small" style="margin-right:20px;">在校</el-tag></el-descriptions-item>
     </el-descriptions>
   </div>
