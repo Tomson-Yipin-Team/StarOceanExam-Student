@@ -33,6 +33,7 @@ src
     │  └─components //组件
     ├─dashboard     //主页
     ├─examination   //考试管理
+    │  ├─all        //合并的考试列表
     │  ├─finish     //已完成的考试
     │  ├─test       //考试页面
     │  │  └─img
