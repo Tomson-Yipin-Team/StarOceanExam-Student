@@ -41,7 +41,7 @@
       >
         <template slot-scope="scope">
           <div slot="reference" class="name-wrapper">
-            <el-tag size="medium">{{ scope.row.state }}</el-tag>
+            <el-tag size="medium" :type="tagColor(scope.$index,scope.row)">{{ scope.row.state }}</el-tag>
           </div>
         </template>
       </el-table-column>
@@ -50,7 +50,7 @@
           <el-button
             size="mini"
             type="primary"
-            :disabled="scope.row.state =='已结束'"
+            :disabled="scope.row.state !=='待参加'"
             @click="handleEdit(scope.$index, scope.row)"
           >{{before(scope.$index,scope.row)}}</el-button>
         </template>
@@ -73,8 +73,7 @@ export default {
     nowTime() {
       const timeData = new Date()
       return moment(timeData).format('YYYY-MM-DD')
-    },
-    
+    }
   },
   methods: {
     before(index,row){
@@ -82,6 +81,15 @@ export default {
       {return '考试已结束'}
       else
       {return '参加考试'}
+    },
+    tagColor(index, row) {
+      if (row.state === '已结束') {
+        return 'success'
+      } else if (row.state === '待参加') {
+        return 'warning'
+      } else if (row.state === '正在批改') {
+        return ''
+      }
     },
     handleEdit(index, row) {
       this.$confirm('即将进入考试, 是否继续?', '提示', {

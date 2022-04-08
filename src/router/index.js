@@ -168,7 +168,7 @@ export const asyncRoutes = [
     children: [
       {
         path: 'admin',
-        component: () => import('@/views/ceshi/1/index'),
+        component: () => import('@/views/examination/all/index'),
         meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
       },
       {
