@@ -6,7 +6,7 @@
       <el-descriptions-item label="昵称">Zerolouis</el-descriptions-item>
       <el-descriptions-item label="学校">南通大学</el-descriptions-item>
       <el-descriptions-item label="学院">信息科学技术学院</el-descriptions-item>
-      <el-descriptions-item label="状态" style="margin-right:20px;"><el-tag size="small" style="margin-right:20px;">在校</el-tag></el-descriptions-item>
+      <el-descriptions-item label="状态" style="margin-right:20px;"><el-tag>在校</el-tag></el-descriptions-item>
     </el-descriptions>
   </div>
 </template>

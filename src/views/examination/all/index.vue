@@ -52,7 +52,7 @@
             type="primary"
             :disabled="scope.row.state !=='待参加'"
             @click="handleEdit(scope.$index, scope.row)"
-          >{{before(scope.$index,scope.row)}}</el-button>
+          >{{ before(scope.$index,scope.row) }}</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -76,11 +76,8 @@ export default {
     }
   },
   methods: {
-    before(index,row){
-      if(moment(row.time).isBefore(this.nowTime))
-      {return '考试已结束'}
-      else
-      {return '参加考试'}
+    before(index, row) {
+      if (moment(row.time).isBefore(this.nowTime)) { return '考试已结束' } else { return '参加考试' }
     },
     tagColor(index, row) {
       if (row.state === '已结束') {

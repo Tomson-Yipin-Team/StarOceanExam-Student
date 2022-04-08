@@ -1,34 +1,18 @@
 <template>
-  <div class="container">
-    <el-alert
-      title="通知:请考生尽快完成考试。"
-      type="warning"
-      effect="dark"
-      show-icon
-      :closable="false"
-    />
-    <div>
-      <el-card>
-        <template slot="header">
-          <!--标题-->
-          <span>
-            已加入的班级
-          </span>
-          <el-button type="text" class="header-button">加入新的班级</el-button>
-        </template>
-        <el-row :gutter="20">
-          <el-col v-for="(item,index) in classrooms" :key="index" :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
-            <Class :class-info="item" class="class-card" />
-          </el-col>
-        </el-row>
-      </el-card>
+  <div>
+    <div class="container">
+      <el-alert
+        title="通知:请考生尽快完成考试。"
+        type="warning"
+        effect="dark"
+        show-icon
+        :closable="false"
+      />
     </div>
-    <!--考试信息-->
-    <div>
-      <el-card style="margin-top:20px">
-      <examall/>
-      </el-card>
-    </div>
+    <Classmain />
+    <el-card style="margin:20px">
+      <examall />
+    </el-card>
   </div>
 </template>
 <style scoped>
@@ -51,17 +35,15 @@
 </style>
 <script>
 import examall from '@/views/examination/all/index'
-import Class from '@/views/classroom/components/Class'
-import ClassInfo from '@/api/class-info'
+import Classmain from '@/views/classroom/index'
 export default {
   name: 'Index',
   components: {
-    Class,
+    Classmain,
     examall
   },
   data() {
     return {
-      classrooms: ClassInfo.classrooms,
     }
   },
   methods: {
