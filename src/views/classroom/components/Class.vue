@@ -11,7 +11,7 @@
       </div>
       <div class="manager">
         <span style="float: left">教师: {{ classInfo.teacher }}</span>
-        <span><el-button type="text" style="float: right;padding: 0px">退出</el-button></span>
+        <span><el-button type="text" style="float: right;padding: 0px">详情</el-button></span>
       </div>
     </el-card>
   </div>
