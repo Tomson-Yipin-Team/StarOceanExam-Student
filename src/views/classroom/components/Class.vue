@@ -2,6 +2,7 @@
   <div>
     <el-card class="box-card" :body-style="{padding:'0px'}" shadow="hover">
       <div class="image-box">
+        <span ><el-button id="in" type="text" style="float: right;padding: 0px" @click="Classdetail">进入</el-button></span>
         <div id="term">{{ classInfo.date }}</div>
         <div id="name">{{ classInfo.name }}</div>
         <div class="classroom">
@@ -32,6 +33,11 @@ export default {
           teacher: '教师名称'
         }
       }
+    }
+  },
+  methods: {
+    Classdetail() {
+      this.$router.push({ path: '/Classdetail' })
     }
   }
 }
@@ -70,5 +76,8 @@ export default {
   top: 23px;
   padding: 20px;
   width: 100%;
+}
+#in{
+  color: white;
 }
 </style>
