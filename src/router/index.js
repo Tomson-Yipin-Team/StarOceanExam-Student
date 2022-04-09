@@ -146,6 +146,11 @@ export const constantRoutes = [
     }]
   },
   {
+    path: '/Classdetail',
+    hidden: true,
+    component: () => import('@/views/classroom/detail/index')
+  },
+  {
     path: '/analysis',
     component: Layout,
     children: [{
