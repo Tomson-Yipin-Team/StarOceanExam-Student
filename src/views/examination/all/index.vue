@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <div>
     <el-table
       :data="examInfo"
       style="width: 100%"
@@ -111,7 +111,7 @@ export default {
               clearInterval(this.timer)
               this.timer = null
               // 跳转的页面写在此处
-              this.$router.push({ path: '/exam' })
+              this.$router.push({ path: '/examination-Notice' })
             }
           }, 1000)
         }

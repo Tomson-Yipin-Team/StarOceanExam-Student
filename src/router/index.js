@@ -64,6 +64,12 @@ export const constantRoutes = [
     hidden: true,
     component: () => import('@/views/analyse/detail/index')
   },
+  // 考生须知和人脸识别页面
+  {
+    path: '/examination-Notice',
+    hidden: true,
+    component: () => import('@/views/examination/joyexam/index')
+  },
 
   {
     path: '/',
@@ -173,13 +179,13 @@ export const asyncRoutes = [
     children: [
       {
         path: 'admin',
-        component: () => import('@/views/examination/all/index'),
+        component: () => import('@/views/ceshi/1/index'),
         meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
       },
       {
         path: 'zhu',
-        component: () => import('@/views/personal/index'),
-        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['zhu'] }
+        component: () => import('@/views/ceshi/2/index'),
+        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['admin'] }
       }
     ]
   },
