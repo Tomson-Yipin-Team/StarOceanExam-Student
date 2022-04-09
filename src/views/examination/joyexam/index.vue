@@ -10,7 +10,7 @@
             <el-col :span="10">
               <el-steps :active="active" finish-status="success" align-center>
                 <el-step title="考生须知" />
-                <el-step title="检测设备" />
+                <el-step title="设备检测" />
                 <el-step title="人脸识别" />
               </el-steps>
             </el-col>
@@ -37,8 +37,8 @@
               <el-button v-if="active!==0" type="primary" plain @click="previous">上一步</el-button>
               <el-button v-if="active==0" type="primary" plain @click="backer">不同意，退出</el-button>
               <el-button v-if="active===0" type="primary" @click="next">我已阅读并同意</el-button>
-              <el-button v-if="active===1" type="primary" @click="next">进入人脸识别</el-button>
-              <el-button v-if="active===2" type="primary" @click="getCompetence">开始人脸识别</el-button>
+              <el-button v-if="active===1" type="primary" @click="next">确认无误</el-button>
+              <el-button v-if="active===2" type="primary" :loading="faceloading" @click="getCompetence">开始人脸识别</el-button>
             </el-col>
           </el-row>
         </el-card>
@@ -58,6 +58,7 @@ export default {
   },
   data() {
     return {
+      faceloading: false,
       active: 0,
       loading: true
     }
@@ -67,7 +68,7 @@ export default {
   },
   methods: {
     loadinghs() {
-      this.loading = false
+      this.loading = true
       setTimeout(() => {
         this.loading = false
       }, 2000)
@@ -80,6 +81,7 @@ export default {
       if (this.active > 0) { this.active -= 1 }
     },
     getCompetence() {
+      this.faceloading = true
       this.imgSrc = ''
       var _this = this
       _this.thisCancas = document.getElementById('canvasCamera')
@@ -148,9 +150,11 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        this.faceloading = false
         this.thisVideo.srcObject.getTracks()[0].stop()
         this.$router.push({ path: '/exam' })
       }).catch(() => {
+        this.faceloading = false
         this.thisVideo.srcObject.getTracks()[0].stop()
         this.$message({
           type: 'info',
