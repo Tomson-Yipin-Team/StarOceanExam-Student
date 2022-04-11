@@ -46,6 +46,7 @@ export default {
           type: 'success',
           message: '正在退出!'
         })
+        this.$emit('deleteid', this.classInfo.id)
       }).catch(() => {
         this.$message({
           type: 'info',

@@ -10,7 +10,7 @@
       </template>
       <el-row :gutter="20">
         <el-col v-for="(item,index) in classrooms" :key="index" :xs="24" :sm="12" :md="6" :lg="6" :xl="6">
-          <Class :class-info="item" class="class-card" />
+          <Class :class-info="item" class="class-card" @deleteid="deleteid" />
         </el-col>
       </el-row>
     </el-card>
@@ -32,6 +32,9 @@ export default {
     }
   },
   methods: {
+    deleteid(deleteid) {
+      this.classrooms.splice(deleteid - 1, 1)
+    },
     joyclass() {
       this.$prompt('请输入课程码', '提示', {
         confirmButtonText: '确定',
@@ -42,6 +45,10 @@ export default {
             type: 'success',
             message: '正在加入...'
           })
+          /* this.classrooms=ClassInfo.newclassrooms */
+          var l = { id: this.classrooms.length + 1, date: '2021-2022第一学期', name: '测试课程', classrooms: ['软嵌201', '软嵌202'], code: value, teacher: '朱老师' }
+          this.classrooms.push(l)
+          /* this.classrooms[6].code=value */
         } else {
           this.$message({
             type: 'error',
