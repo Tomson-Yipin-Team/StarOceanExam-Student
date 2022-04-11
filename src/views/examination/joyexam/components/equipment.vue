@@ -2,16 +2,18 @@
   <div>
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="输入检测">
-        <el-input placeholder="请在此确认键盘按键无误！" 
-        v-model="form.jc" 
-        rows="5"
-        type="textarea" />
+        <el-input
+          v-model="form.jc"
+          placeholder="请在此确认键盘按键无误！"
+          rows="5"
+          type="textarea"
+        />
       </el-form-item>
       <el-form-item label="音频检测">
-        <aplayer 
-        id="audio-player" 
-        :music="audioInfo"
-         />
+        <aplayer
+          id="audio-player"
+          :music="audioInfo"
+        />
       </el-form-item>
 
     </el-form>

@@ -2,7 +2,7 @@
   <div>
     <el-card class="box-card" :body-style="{padding:'0px'}" shadow="hover">
       <div class="image-box">
-        <span ><el-button id="in" type="text" style="float: right;padding: 0px" @click="Classdetail">进入</el-button></span>
+        <span><el-button id="in" type="text" style="float: right;padding: 0px" @click="Classdetail">进入</el-button></span>
         <div id="term">{{ classInfo.date }}</div>
         <div id="name">{{ classInfo.name }}</div>
         <div class="classroom">
@@ -12,7 +12,7 @@
       </div>
       <div class="manager">
         <span style="float: left">教师: {{ classInfo.teacher }}</span>
-        <span><el-button type="text" style="float: right;padding: 0px">退出</el-button></span>
+        <span><el-button type="text" style="float: right;padding: 0px" @click="outclass">退出</el-button></span>
       </div>
     </el-card>
   </div>
@@ -36,6 +36,23 @@ export default {
     }
   },
   methods: {
+    outclass() {
+      this.$confirm('是否退出班级?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'success',
+          message: '正在退出!'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消退出'
+        })
+      })
+    },
     Classdetail() {
       this.$router.push({ path: '/Classdetail' })
     }
