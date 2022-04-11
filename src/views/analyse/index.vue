@@ -60,40 +60,33 @@ export default {
       dialogTableVisible: false,
       dialogFormVisible: false,
       formLabelWidth: '120px',
-      customColors: [
-        { color: '#f56c6c', percentage: 60 },
-        { color: '#e6a23c', percentage: 70 },
-        { color: '#5cb87a', percentage: 80 },
-        { color: '#1989fa', percentage: 90 },
-        { color: '#6f7ad3', percentage: 100 }
-      ],
       tableData: [
         {
           date: '2021-07-02-08:00',
           name: '已结束',
           many: '126',
-          address: '南通大学高等数学(一)期末考试',
+          address: '超星大学高等数学(一)期末考试',
           fraction: '95'
         },
         {
           date: '2021-07-02-10:30',
           name: '已结束',
           many: '67',
-          address: '南通大学大学英语(一)期末考试',
+          address: '超星大学大学英语(一)期末考试',
           fraction: '86'
         },
         {
           date: '2021-07-03-14:00',
           name: '已结束',
           many: '128',
-          address: '南通大学大学物理(一)期末考试',
+          address: '超星大学大学物理(一)期末考试',
           fraction: '92'
         },
         {
           date: '2021-07-03-18:30',
           name: '已结束',
           many: '65',
-          address: '南通大学程序设计基础期末考试',
+          address: '超星大学程序设计基础期末考试',
           fraction: '85'
         }
       ]
