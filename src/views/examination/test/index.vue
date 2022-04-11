@@ -156,9 +156,14 @@
             </el-collapse-item>
             <el-collapse-item title="工具箱" name="tools">
               <div style="margin: 5px">
-                批注开关
+                <el-switch
+                  v-model="show"
+                  inactive-text="人脸检测窗口"
+                />
+
                 <el-switch
                   v-model="showHighLighter"
+                  inactive-text="批注开关"
                 />
               </div>
               <div v-if="showHighLighter">
@@ -177,6 +182,7 @@
               </div>
 
               <el-button>时钟计时</el-button>
+
             </el-collapse-item>
           </el-collapse>
         </div>
@@ -202,7 +208,25 @@
         </el-row>
       </div>
     </el-drawer>
-
+    <!-- 人脸检测窗口 -->
+    <transition>
+      <!--    绑定style中top和left-->
+      <div v-show="show" class="moveBox" :style="position">
+        <div
+          class="moveHead"
+          @mousedown="mousedown"
+          @mousemove="mousemove"
+          @mouseup="mouseup"
+          @mouseleave="mousemove"
+        /><div class="title">人脸识别</div>
+        <!--      关闭按钮-->
+        <div class="close" @click="toggleShow">×</div>
+        <div class="content">
+          <Face/>
+          <slot />
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -215,6 +239,7 @@ import { Viewer } from '@toast-ui/vue-editor'
 import '@toast-ui/editor/dist/i18n/zh-cn.js'
 import APlayer from 'vue-aplayer'
 import Highlighter from 'web-highlighter'
+import Face from './components/Face.vue'
 const highlighter = new Highlighter()
 
 export default {
@@ -222,10 +247,17 @@ export default {
   components: {
     CountDown,
     Viewer,
-    aplayer: APlayer
+    aplayer: APlayer,
+    Face
   },
   data() {
     return {
+      show: false, // 是否显示
+      x: 1800, // left:x
+      y: 700, // top:y
+      leftOffset: 0, // 鼠标距离移动窗口左侧偏移量
+      topOffset: 0, // 鼠标距离移动窗口顶部偏移量
+      isMove: false, // 是否移动标识
       activeNames: ['answers'],
       paper: PaperContent.englishExam,
       questionIndex: 0,
@@ -251,6 +283,12 @@ export default {
       totalAnswer: [],
       showCommentDrawer: false,
       toolsCategory: 'pencil'
+    }
+  },
+  computed: {
+    // top与left加上px
+    position() {
+      return `top:${this.y}px;left:${this.x}px;`
     }
   },
   watch: {
@@ -315,8 +353,94 @@ export default {
     console.log(this.totalAnswer[1].answer)
     this.updateQuestion()
     this.initHighLighter()
+    this.getCompetence()
   },
   methods: {
+    getCompetence() {
+      this.faceloading = true
+      this.imgSrc = ''
+      var _this = this
+      _this.thisCancas = document.getElementById('canvasCamera')
+      _this.thisContext = this.thisCancas.getContext('2d')
+      _this.thisVideo = document.getElementById('videoCamera')
+      _this.thisVideo.style.display = 'block'
+      // 获取媒体属性，旧版本浏览器可能不支持mediaDevices，我们首先设置一个空对象
+      if (navigator.mediaDevices === undefined) {
+        navigator.mediaDevices = {}
+      }
+      // 一些浏览器实现了部分mediaDevices，我们不能只分配一个对象
+      // 使用getUserMedia，因为它会覆盖现有的属性。
+      // 这里，如果缺少getUserMedia属性，就添加它。
+      if (navigator.mediaDevices.getUserMedia === undefined) {
+        navigator.mediaDevices.getUserMedia = function(constraints) {
+          // 首先获取现存的getUserMedia(如果存在)
+          var getUserMedia =
+            navigator.webkitGetUserMedia ||
+            navigator.mozGetUserMedia ||
+            navigator.getUserMedia
+          // 有些浏览器不支持，会返回错误信息
+          // 保持接口一致
+          if (!getUserMedia) { // 不存在则报错
+            return Promise.reject(
+              new Error('getUserMedia is not implemented in this browser')
+            )
+          }
+          // 否则，使用Promise将调用包装到旧的navigator.getUserMedia
+          return new Promise(function(resolve, reject) {
+            getUserMedia.call(navigator, constraints, resolve, reject)
+          })
+        }
+      }
+      var constraints = {
+        audio: false,
+        video: {
+          width: this.videoWidth,
+          height: this.videoHeight,
+          transform: 'scaleX(-1)'
+        }
+      }
+      navigator.mediaDevices
+        .getUserMedia(constraints)
+        .then(function(stream) {
+          // 旧的浏览器可能没有srcObject
+          if ('srcObject' in _this.thisVideo) {
+            _this.thisVideo.srcObject = stream
+          } else {
+            // 避免在新的浏览器中使用它，因为它正在被弃用。
+            _this.thisVideo.src = window.URL.createObjectURL(stream)
+          }
+          _this.thisVideo.onloadedmetadata = function(e) {
+            _this.thisVideo.play()
+          }
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    // 控制打开关闭
+    toggleShow() {
+      this.x = 1800
+      this.y = 700
+      this.show = !this.show
+    },
+    mousedown(event) {
+      // 鼠标按下事件
+      this.leftOffset = event.offsetX
+      this.topOffset = event.offsetY
+      this.isMove = true
+    },
+    // 鼠标移动
+    mousemove(event) {
+      if (!this.isMove) {
+        return
+      }
+      this.x = event.clientX - this.leftOffset
+      this.y = event.clientY - this.topOffset
+    },
+    // 鼠标抬起
+    mouseup() {
+      this.isMove = false
+    },
     initHighLighter() {
       highlighter
         // 鼠标移入触发
@@ -516,6 +640,50 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+.moveBox {
+  width: 300px;
+  height: 250px;
+  position: fixed;
+  box-shadow: 0 0 5px 3px #95a5a6;
+  .moveHead {
+    height: 30px;
+    background-color: #bdc3c7;
+    cursor: move;
+  }
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    line-height: 30px;
+    font-size: 24px;
+    cursor: pointer;
+    display: block;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+  }
+  .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 30px;
+    font-size: 20px;
+  }
+}
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.content {
+  padding: 10px;
+}
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s ease;
+}
+</style>
 
 <style scoped>
 .comment-title{

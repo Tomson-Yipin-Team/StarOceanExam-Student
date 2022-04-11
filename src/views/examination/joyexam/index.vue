@@ -67,7 +67,7 @@ export default {
     this.loadinghs()// 需要触发的函数
   },
   methods: {
-    backer(){
+    backer() {
       this.$router.go(-1)
     },
     loadinghs() {
