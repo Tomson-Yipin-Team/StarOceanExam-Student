@@ -13,7 +13,7 @@
           <CountDown />
         </span>
         <el-divider direction="vertical" />
-        <el-button type="primary" class="submit-button">交卷</el-button>
+        <el-button type="primary" class="submit-button" @click="submit(timu)">交卷</el-button>
       </span>
     </el-card>
 
@@ -41,6 +41,7 @@
               class="answer-input"
               :rows="10"
               placeholder="请输入内容"
+              @change="timu+=1"
             />
           </transition>
         </el-row>
@@ -56,7 +57,7 @@
                 <span id="answer-number">{{ item.content }}.</span>
               </el-col>
               <el-col :span="22">
-                <el-radio-group v-model="totalAnswer[item.content].answer">
+                <el-radio-group v-model="totalAnswer[item.content].answer" @change="timu+=1">
                   <el-radio class="answer-radio" :label="item.A">{{ item.A }}</el-radio>
                   <br>
                   <el-radio class="answer-radio" :label="item.B">{{ item.B }}</el-radio>
@@ -84,7 +85,7 @@
               </el-col>
               <el-col :span="24">
                 <div>
-                  <el-radio-group v-model="totalAnswer[item.number].answer">
+                  <el-radio-group v-model="totalAnswer[item.number].answer" @change="timu+=1">
                     <el-radio class="reading-choice" :label="item.A">{{ item.A }}</el-radio>
                     <br>
                     <el-radio class="reading-choice" :label="item.B">{{ item.B }}</el-radio>
@@ -108,7 +109,7 @@
               {{ item }}.
             </el-col>
             <el-col id="blank-answer" :span="4">
-              <el-input v-model="totalAnswer[item].answer" />
+              <el-input v-model="totalAnswer[item].answer" @change="timu+=1" />
             </el-col>
           </el-row>
         </div>
@@ -117,7 +118,7 @@
           <el-divider />
           <el-row v-for="(item,key,index) in answers" :key="index" class="match-question">
             <el-col id="match-input" :span="1">
-              <el-input v-model="totalAnswer[key].answer" />
+              <el-input v-model="totalAnswer[key].answer" @change="timu+=1" />
             </el-col>
             <el-col id="match-text" :span="20">
               <el-button id="match-mark-button" size="small" :plain="!totalAnswer[key].mark" type="warning" icon="el-icon-star-off" circle @click="changeMatchMark(key)" />
@@ -222,7 +223,7 @@
         <!--      关闭按钮-->
         <div class="close" @click="toggleShow">×</div>
         <div class="content">
-          <Face/>
+          <Face />
           <slot />
         </div>
       </div>
@@ -252,6 +253,7 @@ export default {
   },
   data() {
     return {
+      timu: 0,
       show: false, // 是否显示
       x: 1800, // left:x
       y: 700, // top:y
@@ -597,6 +599,9 @@ export default {
         this.questionIndex = 19
       }
     },
+    timu1() {
+
+    },
     // 答题卡颜色控制
     buttonType(item, index) {
       // console.log('@', item)
@@ -636,6 +641,30 @@ export default {
     clearHighLighter() {
       highlighter.dispose()
       this.highLighterSource = []
+    },
+    // 交卷检测
+    submit(item) {
+      if (item >= 57) {
+        this.$confirm('全部题目已做完, 是否交卷?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'success',
+            message: '提交成功!'
+          })
+          this.$router.push({ path: 'index' })
+        }).catch(() => {
+
+        })
+      } else {
+        this.$alert('还有题目未做完', '提示', {
+          confirmButtonText: '确定',
+          callback: action => {
+          }
+        })
+      }
     }
   }
 }

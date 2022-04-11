@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-col :span="24">
-          <video v-if="!imgSrc" id="videoCamera" :width="videoWidth" :height="videoHeight" autoplay />
-          <canvas v-if="!imgSrc" id="canvasCamera" style="display:none;" :width="videoWidth" :height="videoHeight" />
-          <div v-if="imgSrc" class="img_bg_camera">
-            <img :src="imgSrc" alt class="tx_img">
-          </div>
+      <video v-if="!imgSrc" id="videoCamera" :width="videoWidth" :height="videoHeight" autoplay />
+      <canvas v-if="!imgSrc" id="canvasCamera" style="display:none;" :width="videoWidth" :height="videoHeight" />
+      <div v-if="imgSrc" class="img_bg_camera">
+        <img :src="imgSrc" alt class="tx_img">
+      </div>
     </el-col>
   </div>
 </template>
