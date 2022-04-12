@@ -13,7 +13,7 @@
           <CountDown />
         </span>
         <el-divider direction="vertical" />
-        <el-button type="primary" class="submit-button" @click="submit(timu)">交卷</el-button>
+        <el-button v-loading.fullscreen.lock="quanpingloding" type="primary" class="submit-button" @click="submit(timu)">交卷</el-button>
       </span>
     </el-card>
 
@@ -253,10 +253,11 @@ export default {
   },
   data() {
     return {
+      quanpingloding: false,
       timu: 0,
       show: false, // 是否显示
-      x: 1800, // left:x
-      y: 700, // top:y
+      x: 85, // left:x
+      y: 75, // top:y
       leftOffset: 0, // 鼠标距离移动窗口左侧偏移量
       topOffset: 0, // 鼠标距离移动窗口顶部偏移量
       isMove: false, // 是否移动标识
@@ -290,7 +291,7 @@ export default {
   computed: {
     // top与left加上px
     position() {
-      return `top:${this.y}px;left:${this.x}px;`
+      return `top:${this.y}%;left:${this.x}%;`
     }
   },
   watch: {
@@ -421,8 +422,8 @@ export default {
     },
     // 控制打开关闭
     toggleShow() {
-      this.x = 1800
-      this.y = 700
+      this.x = 85
+      this.y = 80
       this.show = !this.show
     },
     mousedown(event) {
@@ -650,19 +651,37 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '提交成功!'
-          })
-          this.$router.push({ path: 'index' })
+          this.thisVideo.srcObject.getTracks()[0].stop()
+          this.quanpingloding = true
+          setTimeout(() => {
+            this.quanpingloding = false
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            })
+            this.$router.push({ path: 'index' })
+          }, 2000)
         }).catch(() => {
 
         })
       } else {
-        this.$alert('还有题目未做完', '提示', {
+        this.$confirm('还有题目未做完，是否交卷?', '提示', {
           confirmButtonText: '确定',
-          callback: action => {
-          }
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.thisVideo.srcObject.getTracks()[0].stop()
+          this.quanpingloding = true
+          setTimeout(() => {
+            this.quanpingloding = false
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            })
+            this.$router.push({ path: 'index' })
+          }, 2000)
+        }).catch(() => {
+
         })
       }
     }
