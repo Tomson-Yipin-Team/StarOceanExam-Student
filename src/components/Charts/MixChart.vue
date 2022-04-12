@@ -47,12 +47,12 @@ export default {
       const xData = (function() {
         const data = []
 
-        data.push('听力A')
-        data.push('听力B')
-        data.push('听力C')
-        data.push('阅读')
-        data.push('完形填空')
-        data.push('语法填空')
+        data.push('听力SectionA')
+        data.push('听力SectionB')
+        data.push('听力SectionC')
+        data.push('缺词填空')
+        data.push('段落匹配')
+        data.push('仔细阅读')
         data.push('翻译')
         data.push('作文')
         return data
@@ -123,8 +123,12 @@ export default {
         }],
         yAxis: [{
           type: 'value',
+          name: '分数',
+          min: 0,
+          max: 20,
+          interval:5,
           splitLine: {
-            show: false
+            show: true
           },
           axisLine: {
             lineStyle: {
@@ -175,13 +179,13 @@ export default {
           barGap: '10%',
           itemStyle: {
             normal: {
-              color: 'rgba(255,144,128,1)',
+              color: '#2986cc',
               label: {
                 show: true,
                 textStyle: {
                   color: '#fff'
                 },
-                position: 'insideTop',
+                position: 'top',
                 formatter(p) {
                   return p.value > 0 ? p.value : ''
                 }
@@ -189,18 +193,14 @@ export default {
             }
           },
           data: [
-            70,
-            19,
-            24,
-            26,
-            17,
-            14,
-            15,
-            32,
-            52,
-            33,
-            24,
-            40
+            7,
+            8,
+            18,
+            5,
+            10,
+            18,
+            12,
+            11
           ]
         },
 
@@ -212,7 +212,7 @@ export default {
           barGap: '10%',
           itemStyle: {
             normal: {
-              color: 'rgba(0,191,183,1)',
+              color: '#d9d2e9',
               barBorderRadius: 0,
               label: {
                 show: true,
@@ -224,28 +224,24 @@ export default {
             }
           },
           data: [
-            32,
+            6,
+            7,
             17,
-            50,
-            12,
+            4,
             8,
-            48,
-            20,
-            13,
+            16,
             10,
-            65,
-            38,
-            22
+            11
           ]
         }, {
           name: '最高分',
           type: 'line',
-          stack: 'total',
+          stack: 'total3',
           symbolSize: 10,
           symbol: 'circle',
           itemStyle: {
             normal: {
-              color: 'rgba(252,230,48,1)',
+              color: '#f1c232',
               barBorderRadius: 0,
               label: {
                 show: true,
@@ -257,18 +253,14 @@ export default {
             }
           },
           data: [
-            75,
-            25,
-            40,
-            36,
-            63,
-            54,
-            35,
-            39,
-            58,
-            40,
-            36,
-            49
+            7,
+            8,
+            20,
+            5,
+            10,
+            20,
+            13,
+            11
           ]
         }
         ]

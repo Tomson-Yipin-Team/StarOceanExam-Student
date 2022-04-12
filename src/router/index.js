@@ -173,22 +173,22 @@ export const constantRoutes = [
 ]
 
 export const asyncRoutes = [
-  {
-    path: '/ceshi',
-    component: Layout,
-    children: [
-      {
-        path: 'admin',
-        component: () => import('@/views/ceshi/1/index'),
-        meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
-      },
-      {
-        path: 'zhu',
-        component: () => import('@/views/ceshi/2/index'),
-        meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['admin'] }
-      }
-    ]
-  },
+  // {
+  //   path: '/ceshi',
+  //   component: Layout,
+  //   children: [
+  //     {
+  //       path: 'admin',
+  //       component: () => import('@/views/ceshi/1/index'),
+  //       meta: { title: '提交反馈', icon: 'el-icon-s-check', roles: ['admin'] }
+  //     },
+  //     {
+  //       path: 'zhu',
+  //       component: () => import('@/views/ceshi/2/index'),
+  //       meta: { title: 'zhu', icon: 'el-icon-s-check', roles: ['admin'] }
+  //     }
+  //   ]
+  // },
   // 404 页面必须放置在最后一个页面
   { path: '*', redirect: '/404', hidden: true }
 ]
