@@ -50,7 +50,7 @@
           <el-button
             size="mini"
             type="primary"
-            @click="handleAnalyse"
+            @click="handleInfo"
           >查看</el-button>
         </template>
       </el-table-column>
@@ -59,6 +59,7 @@
 </template>
 <script>
 import classdetail from '@/api/classdetail'
+import { Message } from 'element-ui'
 export default {
   data() {
     return {
@@ -68,6 +69,11 @@ export default {
   methods: {
     goBack() {
       this.$router.push({ name: '首页' })
+    },
+    handleInfo(){
+      this.$message({
+        message: '山鬼不识烟火味'
+      })
     }
   }
 }

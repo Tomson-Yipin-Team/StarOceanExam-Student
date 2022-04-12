@@ -30,7 +30,7 @@
         </div>
         <div>
           <span class="user-social-icon"><svg-icon icon-class="wechat" /></span>
-          <span class="user-social-text">郁闷的酱油瓶</span>
+          <span class="user-social-text">张佳</span>
         </div>
 
       </div>
@@ -46,7 +46,7 @@ export default {
   data() {
     return {
       user: {
-        name: '郁闷の酱油瓶',
+        name: '张佳',
         role: '学生',
         intro: '这里是个人简介'
       },

@@ -49,12 +49,12 @@ export default {
     return {
       edit: false,
       form: {
-        name: 'wxjjuju0322@gmail.com',
-        realName: '小明',
+        name: '13896545641',
+        realName: '张佳',
         nickname: 'Zerolouis',
         birthday: '2022-03-22',
         password: '12345567',
-        intro: '阳光大男孩',
+        intro: '鱼翔浅底',
         school: '超星大学',
         profession: '信息科学技术学院',
         desc: '这里是个人简介'
