@@ -45,13 +45,9 @@
           </div>
         </template>
       </el-table-column>
-      <el-table-column label="操作">
+      <el-table-column label="分数">
         <template slot-scope="scope">
-          <el-button
-            size="mini"
-            type="primary"
-            @click="handleEdit1(scope.$index, scope.row)"
-          >查看成绩</el-button>
+          <el-tag size="medium">{{ scope.row.fraction }}</el-tag>
         </template>
       </el-table-column>
     </el-table>

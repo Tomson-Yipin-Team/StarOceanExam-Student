@@ -41,19 +41,6 @@
         label="所属班级"
         width="180"
       />
-      <el-table-column
-        prop="info"
-        label="个人信息"
-        width="155"
-      >
-        <template slot-scope="{}">
-          <el-button
-            size="mini"
-            type="primary"
-            @click="handleAnalyse"
-          >查看</el-button>
-        </template>
-      </el-table-column>
     </el-table>
   </el-card>
 </template>
