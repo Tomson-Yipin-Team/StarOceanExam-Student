@@ -7,7 +7,14 @@
       <span>
         考生:{{ $store.state.user.name }}
       </span>
+
       <span id="tips">
+        <span v-show="timeshow">
+          工具箱时间：
+          <span class="gjxtime">
+            <Timeshow ref="timeshowchild" />
+          </span>
+        </span>
         考试时间 :
         <span class="time">
           <CountDown />
@@ -182,7 +189,7 @@
                 </el-radio-group>
               </div>
 
-              <el-button><svg-icon icon-class="时间_time" /></el-button>
+              <el-button @click="timeshow=!timeshow"><svg-icon icon-class="时间_time" /></el-button>
 
             </el-collapse-item>
           </el-collapse>
@@ -241,6 +248,7 @@ import '@toast-ui/editor/dist/i18n/zh-cn.js'
 import APlayer from 'vue-aplayer'
 import Highlighter from 'web-highlighter'
 import Face from './components/Face.vue'
+import Timeshow from './components/Timeshow.vue'
 const highlighter = new Highlighter()
 
 export default {
@@ -249,10 +257,12 @@ export default {
     CountDown,
     Viewer,
     aplayer: APlayer,
-    Face
+    Face,
+    Timeshow
   },
   data() {
     return {
+      timeshow: false,
       quanpingloding: false,
       timu: 0,
       show: false, // 是否显示
@@ -363,8 +373,30 @@ export default {
     this.updateQuestion()
     this.initHighLighter()
     this.getCompetence()
+    this.Notice()
   },
   methods: {
+    //教师端公告函数
+    Notice() {
+      setTimeout(() => {
+        this.$alert('第七题的A选项的答案更改为:<br> Welcome to the super star university examination system.', '提示', {
+          dangerouslyUseHTMLString: true,
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'success',
+              message: '已经收到通知'
+            })
+          }
+        })
+      }, 30000)
+    },
+    // 工具箱时间函数
+    timeshowhs() {
+      this.timeshow = !this.timeshow
+      const child = this.$refs.timeshowchild
+      child.countTime()
+    },
     getCompetence() {
       this.faceloading = true
       this.imgSrc = ''
@@ -506,6 +538,8 @@ export default {
           // 写作题
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showInput = true
           }, 300)
@@ -514,6 +548,7 @@ export default {
           // 提示
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshow = false
             this.showTips = true
           }, 300)
           break
@@ -523,6 +558,7 @@ export default {
           this.audioInfo = this.question.audioInfo
           // this.answers = this.question.answers
           setTimeout(() => {
+            this.timeshow = false
             this.showTips = true
             this.showListenAnswer = true
           }, 300)
@@ -532,6 +568,8 @@ export default {
           // this.answers = this.question.answers
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showBlanks = true
           }, 300)
@@ -540,6 +578,8 @@ export default {
           // 信息匹配
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showMatch = true
           }, 300)
@@ -548,6 +588,8 @@ export default {
           // 阅读理解
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showReading = true
           }, 300)
@@ -826,6 +868,11 @@ position: relative;
   font-size: 1.5em;
   font-weight: bold;
   color: #a29bfe;
+}
+.gjxtime{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #39da69;
 }
 .question-container{
   margin: 10px;

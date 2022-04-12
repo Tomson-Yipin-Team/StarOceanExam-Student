@@ -126,7 +126,7 @@ export default {
           name: '分数',
           min: 0,
           max: 20,
-          interval:5,
+          interval: 5,
           splitLine: {
             show: true
           },
