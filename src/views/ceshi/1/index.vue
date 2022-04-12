@@ -29,8 +29,8 @@ export default {
   data() {
     return {
       show: true, // 是否显示
-      x: 1800, // left:x
-      y: 700, // top:y
+      x: 85, // left:x
+      y: 70, // top:y
       leftOffset: 0, // 鼠标距离移动窗口左侧偏移量
       topOffset: 0, // 鼠标距离移动窗口顶部偏移量
       isMove: false// 是否移动标识
@@ -39,14 +39,14 @@ export default {
   computed: {
     // top与left加上px
     position() {
-      return `top:${this.y}px;left:${this.x}px;`
+      return `top:${this.y}%;left:${this.x}%;`
     }
   },
   methods: {
     // 控制打开关闭
     toggleShow() {
-      this.x = 1800
-      this.y = 700
+      this.x = 85
+      this.y = 70
       this.show = !this.show
     },
     mousedown(event) {
