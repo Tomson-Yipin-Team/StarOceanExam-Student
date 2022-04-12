@@ -36,7 +36,7 @@
             <!--作文输入框-->
             <el-input
               v-if="showInput"
-              v-model="editorText"
+              v-model="editorText[question.name]"
               type="textarea"
               class="answer-input"
               :rows="10"
@@ -174,15 +174,15 @@
                 </el-button-group>
               </div>
               <div v-if="showHighLighter">
-                <el-radio-group v-model="toolsCategory" style="margin: 5px"  >
-                  <el-radio-button  label="pencil"><svg-icon icon-class="写作_write"/></el-radio-button>
-                  <el-radio-button  label="pen-green"><svg-icon icon-class="high_light_green"/></el-radio-button>
-                  <el-radio-button  label="pen-yellow"><svg-icon icon-class="high_light_yellow"/></el-radio-button>
-                  <el-radio-button  label="pen-blue"><svg-icon icon-class="high_light_blue"/></el-radio-button>
+                <el-radio-group v-model="toolsCategory" style="margin: 5px">
+                  <el-radio-button label="pencil"><svg-icon icon-class="写作_write" /></el-radio-button>
+                  <el-radio-button label="pen-green"><svg-icon icon-class="high_light_green" /></el-radio-button>
+                  <el-radio-button label="pen-yellow"><svg-icon icon-class="high_light_yellow" /></el-radio-button>
+                  <el-radio-button label="pen-blue"><svg-icon icon-class="high_light_blue" /></el-radio-button>
                 </el-radio-group>
               </div>
 
-              <el-button><svg-icon icon-class="时间_time"/></el-button>
+              <el-button><svg-icon icon-class="时间_time" /></el-button>
 
             </el-collapse-item>
           </el-collapse>
@@ -264,7 +264,10 @@ export default {
       paper: PaperContent.englishExam,
       questionIndex: 0,
       viewerText: '',
-      editorText: '',
+      editorText: {
+        0: '',
+        56: ''
+      },
       showTips: false,
       showQuestion: false,
       showInput: false,
@@ -317,9 +320,12 @@ export default {
       }
     },
     editorText: {
+      deep: true,
       immediate: false,
       // 计算字数
-      handler(newString) {
+      handler(newValue) {
+        let newString
+        newString = newValue[this.question.name]
         newString = newString.replace(/[\u4e00-\u9fa5]+/g, ' ')
         newString = newString.replace(/\n|\r|^\s+|\s+$/gi, '')
         newString = newString.replace(/\s+/gi, ' ')
@@ -331,7 +337,7 @@ export default {
           length = 1
         }
         // console.log(this.totalAnswer[this.question.name])
-        this.totalAnswer[this.question.name].answer = this.editorText
+        this.totalAnswer[this.question.name].answer = newString
         this.number = length
       }
     },
