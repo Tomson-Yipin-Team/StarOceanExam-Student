@@ -5,9 +5,9 @@
         <el-card>
           <div class="container">
             <el-descriptions class="description" :column="1" border :content-style="descriptionsPram.CS" :label-style="descriptionsPram.LS">
-              <el-descriptions-item label="考试名称">四级真题（第2套）模拟考试</el-descriptions-item>
-              <el-descriptions-item label="姓名">小明</el-descriptions-item>
-              <el-descriptions-item label="学号">2130110451</el-descriptions-item>
+              <el-descriptions-item label="考试名称">四级真题模拟考试</el-descriptions-item>
+              <el-descriptions-item label="姓名">张佳</el-descriptions-item>
+              <el-descriptions-item label="学号">2050110732</el-descriptions-item>
               <el-descriptions-item label="参考人数">69</el-descriptions-item>
               <el-descriptions-item label="开始时间">2021-07-02-08：00</el-descriptions-item>
               <el-descriptions-item label="状态"><el-tag type="warning">待参加</el-tag></el-descriptions-item>

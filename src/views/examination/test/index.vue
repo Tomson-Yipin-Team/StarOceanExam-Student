@@ -174,15 +174,15 @@
                 </el-button-group>
               </div>
               <div v-if="showHighLighter">
-                <el-radio-group v-model="toolsCategory" style="margin: 5px">
-                  <el-radio-button label="pencil">铅笔</el-radio-button>
-                  <el-radio-button label="pen-green">绿色荧光</el-radio-button>
-                  <el-radio-button label="pen-yellow">黄色荧光</el-radio-button>
-                  <el-radio-button label="pen-blue">蓝色荧光</el-radio-button>
+                <el-radio-group v-model="toolsCategory" style="margin: 5px"  >
+                  <el-radio-button  label="pencil"><svg-icon icon-class="写作_write"/></el-radio-button>
+                  <el-radio-button  label="pen-green"><svg-icon icon-class="high_light_green"/></el-radio-button>
+                  <el-radio-button  label="pen-yellow"><svg-icon icon-class="high_light_yellow"/></el-radio-button>
+                  <el-radio-button  label="pen-blue"><svg-icon icon-class="high_light_blue"/></el-radio-button>
                 </el-radio-group>
               </div>
 
-              <el-button>时钟计时</el-button>
+              <el-button><svg-icon icon-class="时间_time"/></el-button>
 
             </el-collapse-item>
           </el-collapse>

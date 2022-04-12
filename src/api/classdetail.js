@@ -17,7 +17,7 @@ export default {
   },
   {
     name: '张程',
-    number: 2050110732,
+    number: 2050110777,
     sex: '男',
     identity: '学生',
     date: '2021-9-20',
@@ -150,14 +150,6 @@ export default {
     identity: '学生',
     date: '2021-9-20',
     class: '软工201'
-  },
-  {
-    name: '汪子晗',
-    number: 2050110792,
-    sex: '男',
-    identity: '学生',
-    date: '2021-9-20',
-    class: '软工202'
   },
   {
     name: '蒋来',
