@@ -51,7 +51,7 @@ export default {
       form: {
         name: '13896545641',
         realName: '张佳',
-        nickname: 'Zerolouis',
+        nickname: '2050110732',
         birthday: '2022-03-22',
         password: '12345567',
         intro: '鱼翔浅底',
