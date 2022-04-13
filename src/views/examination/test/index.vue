@@ -2,7 +2,7 @@
   <div>
     <!--顶栏-->
     <el-card class="header-card">
-      <span>2019年6月四级真题（第2套）模拟考试</span>
+      <span>2021-2022-2大学英语六级模拟考试（2）</span>
       <el-divider direction="vertical" />
       <span>
         考生:{{ $store.state.user.name }}

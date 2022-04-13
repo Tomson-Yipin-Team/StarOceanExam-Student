@@ -5,11 +5,11 @@
         <el-card>
           <div class="container">
             <el-descriptions class="description" :column="1" border :content-style="descriptionsPram.CS" :label-style="descriptionsPram.LS">
-              <el-descriptions-item label="考试名称">四级真题模拟考试</el-descriptions-item>
+              <el-descriptions-item label="考试名称">2021-2022-2大学英语六级模拟考试（2）</el-descriptions-item>
               <el-descriptions-item label="姓名">张佳</el-descriptions-item>
               <el-descriptions-item label="学号">2050110732</el-descriptions-item>
-              <el-descriptions-item label="参考人数">56</el-descriptions-item>
-              <el-descriptions-item label="开始时间">2022-03-12-08:00</el-descriptions-item>
+              <el-descriptions-item label="参考人数">21</el-descriptions-item>
+              <el-descriptions-item label="开始时间">2022-03-06-16:00</el-descriptions-item>
               <el-descriptions-item label="状态"><el-tag type="warning">待参加</el-tag></el-descriptions-item>
             </el-descriptions>
           </div>
