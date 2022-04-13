@@ -83,7 +83,7 @@
             <i class="el-icon-office-building" />
             考试地点
           </template>
-          南通大学3号教学楼206室
+          <!-- 南通大学3号教学楼206室 -->
         </el-descriptions-item>
       </el-descriptions>
     </el-dialog>
