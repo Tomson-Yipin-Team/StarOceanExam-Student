@@ -7,13 +7,20 @@
       <span>
         考生:{{ $store.state.user.name }}
       </span>
+
       <span id="tips">
+        <span v-show="timeshow">
+          工具箱时间：
+          <span class="gjxtime">
+            <Timeshow ref="timeshowchild" />
+          </span>
+        </span>
         考试时间 :
         <span class="time">
           <CountDown />
         </span>
         <el-divider direction="vertical" />
-        <el-button type="primary" class="submit-button" @click="submit(timu)">交卷</el-button>
+        <el-button v-loading.fullscreen.lock="quanpingloding" type="primary" class="submit-button" @click="submit(timu)">交卷</el-button>
       </span>
     </el-card>
 
@@ -36,7 +43,7 @@
             <!--作文输入框-->
             <el-input
               v-if="showInput"
-              v-model="editorText"
+              v-model="editorText[question.name]"
               type="textarea"
               class="answer-input"
               :rows="10"
@@ -174,15 +181,15 @@
                 </el-button-group>
               </div>
               <div v-if="showHighLighter">
-                <el-radio-group v-model="toolsCategory" style="margin: 5px"  >
-                  <el-radio-button  label="pencil"><svg-icon icon-class="写作_write"/></el-radio-button>
-                  <el-radio-button  label="pen-green"><svg-icon icon-class="high_light_green"/></el-radio-button>
-                  <el-radio-button  label="pen-yellow"><svg-icon icon-class="high_light_yellow"/></el-radio-button>
-                  <el-radio-button  label="pen-blue"><svg-icon icon-class="high_light_blue"/></el-radio-button>
+                <el-radio-group v-model="toolsCategory" style="margin: 5px">
+                  <el-radio-button label="pencil"><svg-icon icon-class="写作_write" /></el-radio-button>
+                  <el-radio-button label="pen-green"><svg-icon icon-class="high_light_green" /></el-radio-button>
+                  <el-radio-button label="pen-yellow"><svg-icon icon-class="high_light_yellow" /></el-radio-button>
+                  <el-radio-button label="pen-blue"><svg-icon icon-class="high_light_blue" /></el-radio-button>
                 </el-radio-group>
               </div>
 
-              <el-button><svg-icon icon-class="时间_time"/></el-button>
+              <el-button @click="timeshow=!timeshow"><svg-icon icon-class="时间_time" /></el-button>
 
             </el-collapse-item>
           </el-collapse>
@@ -241,6 +248,7 @@ import '@toast-ui/editor/dist/i18n/zh-cn.js'
 import APlayer from 'vue-aplayer'
 import Highlighter from 'web-highlighter'
 import Face from './components/Face.vue'
+import Timeshow from './components/Timeshow.vue'
 const highlighter = new Highlighter()
 
 export default {
@@ -249,14 +257,17 @@ export default {
     CountDown,
     Viewer,
     aplayer: APlayer,
-    Face
+    Face,
+    Timeshow
   },
   data() {
     return {
+      timeshow: false,
+      quanpingloding: false,
       timu: 0,
       show: false, // 是否显示
-      x: 1800, // left:x
-      y: 700, // top:y
+      x: 85, // left:x
+      y: 75, // top:y
       leftOffset: 0, // 鼠标距离移动窗口左侧偏移量
       topOffset: 0, // 鼠标距离移动窗口顶部偏移量
       isMove: false, // 是否移动标识
@@ -264,7 +275,10 @@ export default {
       paper: PaperContent.englishExam,
       questionIndex: 0,
       viewerText: '',
-      editorText: '',
+      editorText: {
+        0: '',
+        56: ''
+      },
       showTips: false,
       showQuestion: false,
       showInput: false,
@@ -290,7 +304,7 @@ export default {
   computed: {
     // top与left加上px
     position() {
-      return `top:${this.y}px;left:${this.x}px;`
+      return `top:${this.y}%;left:${this.x}%;`
     }
   },
   watch: {
@@ -317,9 +331,12 @@ export default {
       }
     },
     editorText: {
+      deep: true,
       immediate: false,
       // 计算字数
-      handler(newString) {
+      handler(newValue) {
+        let newString
+        newString = newValue[this.question.name]
         newString = newString.replace(/[\u4e00-\u9fa5]+/g, ' ')
         newString = newString.replace(/\n|\r|^\s+|\s+$/gi, '')
         newString = newString.replace(/\s+/gi, ' ')
@@ -331,7 +348,7 @@ export default {
           length = 1
         }
         // console.log(this.totalAnswer[this.question.name])
-        this.totalAnswer[this.question.name].answer = this.editorText
+        this.totalAnswer[this.question.name].answer = newString
         this.number = length
       }
     },
@@ -356,8 +373,30 @@ export default {
     this.updateQuestion()
     this.initHighLighter()
     this.getCompetence()
+    this.Notice()
   },
   methods: {
+    //教师端公告函数
+    Notice() {
+      setTimeout(() => {
+        this.$alert('第七题的A选项的答案更改为:<br> Welcome to the super star university examination system.', '提示', {
+          dangerouslyUseHTMLString: true,
+          confirmButtonText: '确定',
+          callback: action => {
+            this.$message({
+              type: 'success',
+              message: '已经收到通知'
+            })
+          }
+        })
+      }, 30000)
+    },
+    // 工具箱时间函数
+    timeshowhs() {
+      this.timeshow = !this.timeshow
+      const child = this.$refs.timeshowchild
+      child.countTime()
+    },
     getCompetence() {
       this.faceloading = true
       this.imgSrc = ''
@@ -421,8 +460,8 @@ export default {
     },
     // 控制打开关闭
     toggleShow() {
-      this.x = 1800
-      this.y = 700
+      this.x = 85
+      this.y = 80
       this.show = !this.show
     },
     mousedown(event) {
@@ -499,6 +538,8 @@ export default {
           // 写作题
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showInput = true
           }, 300)
@@ -507,6 +548,7 @@ export default {
           // 提示
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshow = false
             this.showTips = true
           }, 300)
           break
@@ -516,6 +558,7 @@ export default {
           this.audioInfo = this.question.audioInfo
           // this.answers = this.question.answers
           setTimeout(() => {
+            this.timeshow = false
             this.showTips = true
             this.showListenAnswer = true
           }, 300)
@@ -525,6 +568,8 @@ export default {
           // this.answers = this.question.answers
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showBlanks = true
           }, 300)
@@ -533,6 +578,8 @@ export default {
           // 信息匹配
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showMatch = true
           }, 300)
@@ -541,6 +588,8 @@ export default {
           // 阅读理解
           this.viewerText = this.question.tip
           setTimeout(() => {
+            this.timeshowhs()
+            if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showReading = true
           }, 300)
@@ -650,19 +699,37 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(() => {
-          this.$message({
-            type: 'success',
-            message: '提交成功!'
-          })
-          this.$router.push({ path: 'index' })
+          this.thisVideo.srcObject.getTracks()[0].stop()
+          this.quanpingloding = true
+          setTimeout(() => {
+            this.quanpingloding = false
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            })
+            this.$router.push({ path: 'index' })
+          }, 2000)
         }).catch(() => {
 
         })
       } else {
-        this.$alert('还有题目未做完', '提示', {
+        this.$confirm('还有题目未做完，是否交卷?', '提示', {
           confirmButtonText: '确定',
-          callback: action => {
-          }
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.thisVideo.srcObject.getTracks()[0].stop()
+          this.quanpingloding = true
+          setTimeout(() => {
+            this.quanpingloding = false
+            this.$message({
+              type: 'success',
+              message: '提交成功!'
+            })
+            this.$router.push({ path: 'index' })
+          }, 2000)
+        }).catch(() => {
+
         })
       }
     }
@@ -801,6 +868,11 @@ position: relative;
   font-size: 1.5em;
   font-weight: bold;
   color: #a29bfe;
+}
+.gjxtime{
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #39da69;
 }
 .question-container{
   margin: 10px;

@@ -8,8 +8,8 @@
       <el-form-item label="真名">
         <el-input v-model="form.realName" style="width: 300px" />
       </el-form-item>
-      <el-form-item label="昵称">
-        <el-input v-model="form.nickname" :disabled="edit" style="width:300px" />
+      <el-form-item label="学号">
+        <el-input v-model="form.nickname" :disabled="true" style="width:300px" />
       </el-form-item>
       <el-form-item label="学校">
         <el-select v-model="form.school" placeholder="请选择学校">
@@ -49,12 +49,12 @@ export default {
     return {
       edit: false,
       form: {
-        name: 'wxjjuju0322@gmail.com',
-        realName: '小明',
-        nickname: 'Zerolouis',
+        name: '13896545641',
+        realName: '张佳',
+        nickname: '2050110732',
         birthday: '2022-03-22',
         password: '12345567',
-        intro: '阳光大男孩',
+        intro: '鱼翔浅底',
         school: '超星大学',
         profession: '信息科学技术学院',
         desc: '这里是个人简介'
