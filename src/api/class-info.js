@@ -2,7 +2,7 @@ export default {
   classrooms: [{
     id: 1,
     date: '2021-2022第二学期',
-    name: '大学英语（四）',
+    name: '线性代数',
     classrooms: ['软工201', '软工202'],
     code: '12edxf2',
     teacher: '方慧敏',

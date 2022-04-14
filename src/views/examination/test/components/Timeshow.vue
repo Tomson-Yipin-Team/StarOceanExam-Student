@@ -21,11 +21,11 @@ export default {
       clearInterval(this.timer)
       this.timer = null
     },
-    countTime() {
+    countTime(timeshowss) {
       clearInterval(this.timer)
       this.timer = null
       // 定义15分钟的秒数，此处根据需要进行定义
-      const time = 900
+      const time = timeshowss
       if (!this.timer) {
         this.count = time
         this.timer = setInterval(() => {

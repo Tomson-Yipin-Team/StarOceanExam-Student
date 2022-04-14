@@ -64,7 +64,7 @@ export default {
         many: '19',
         address: '2021-2022-2大学英语六级模拟考试（二）',
         fraction: '89'
-      },{
+      }, {
         date: '2022-03-03-08:00',
         name: '已结束',
         many: '19',

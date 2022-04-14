@@ -46,7 +46,7 @@ export default {
             message: '正在加入...'
           })
           /* this.classrooms=ClassInfo.newclassrooms */
-          var l = { id: this.classrooms.length + 1, date: '2021-2022第二学期', name: '线性代数', classrooms: ['软嵌201', '软嵌202'], code: value, teacher: '李铭' }
+          var l = { id: this.classrooms.length + 1, date: '2021-2022第二学期', name: '大学英语（四）', classrooms: ['软嵌201', '软嵌202'], code: value, teacher: '方慧敏' }
           this.classrooms.push(l)
           /* this.classrooms[6].code=value */
         } else {
