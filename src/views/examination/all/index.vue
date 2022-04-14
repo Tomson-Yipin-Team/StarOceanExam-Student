@@ -77,14 +77,14 @@ export default {
   },
   methods: {
     before(index, row) {
-      if (moment(row.time).isBefore(this.nowTime)) { return '考试已结束' } else { return '参加考试' }
+      if (row.state === '已结束' || row.state === '待批改') { return '考试已结束' } else if (row.state === '待参加') { return '参加考试' }
     },
     tagColor(index, row) {
       if (row.state === '已结束') {
         return 'success'
       } else if (row.state === '待参加') {
         return 'warning'
-      } else if (row.state === '正在批改') {
+      } else if (row.state === '待批改') {
         return ''
       }
     },

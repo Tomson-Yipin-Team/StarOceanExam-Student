@@ -1,9 +1,9 @@
 
 const tokens = {
-  admin: {
+  13896545641: {
     token: 'admin-token'
   },
-  zhu: {
+  18862574521: {
     token: 'zhu-token'
   }
 }
@@ -19,7 +19,7 @@ const users = {
     roles: ['zhu'],
     introduction: 'I am an editor',
     avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
-    name: '普通用户'
+    name: '张佳'
   }
 }
 

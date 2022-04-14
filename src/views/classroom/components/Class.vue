@@ -47,6 +47,15 @@ export default {
       }
     }
   },
+  watch: {
+    classInfo: {
+      immediate: true,
+      deep: true,
+      handler(newValue) {
+        this.imageClass.backgroundImage = newValue.url
+      }
+    }
+  },
   methods: {
     outclass() {
       this.$confirm('是否退出班级?', '提示', {
@@ -68,15 +77,6 @@ export default {
     },
     Classdetail() {
       this.$router.push({ path: '/Classdetail' })
-    }
-  },
-  watch: {
-    classInfo: {
-      immediate: true,
-      deep: true,
-      handler(newValue) {
-        this.imageClass.backgroundImage = newValue.url
-      }
     }
   }
 }

@@ -5,7 +5,7 @@ export default {
     name: '线性代数',
     classrooms: ['软工201', '软工202'],
     code: '12edxf2',
-    teacher: '方慧敏',
+    teacher: '张强',
     url: 'url("https://snz04pap001files.storage.live.com/y4mxbI_YUQrlmKkkotfrICpyBjV1Wii_HYkJ8LXDK0X2LwEaBgp9gcWHQcn9gI4FjfkJUxZ3xfOxsj3SQo5GC2Z8gRD-WOudLLLKD2BSjWToRrr3WLzD7cRNd74xtQZhiXU0tWBR-xewbpWlyl2Xzb5P_2BrEe57OsAAqUy0ivMXlkJTbe3mPyy4mNg48VTt6pB?width=938&height=626&cropmode=none")'
   }, {
     id: 2,
