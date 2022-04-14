@@ -189,8 +189,8 @@
                 </el-radio-group>
               </div>
 
-              <el-button @click="timeshow=!timeshow"><svg-icon icon-class="时间_time" /></el-button>
-
+              <el-button @click="timeshowhs()"><svg-icon icon-class="时间_time" /></el-button>
+              <el-button icon="el-icon-s-custom" @click="feedback" />
             </el-collapse-item>
           </el-collapse>
         </div>
@@ -376,7 +376,27 @@ export default {
     this.Notice()
   },
   methods: {
-    //教师端公告函数
+    // 工具箱反馈功能
+    feedback() {
+      this.$prompt('请输入内容', '反馈', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        closeOnPressEscape: false,
+        closeOnClickModal: false
+
+      }).then(({ value }) => {
+        this.$message({
+          type: 'success',
+          message: '反馈成功！'
+        })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消反馈'
+        })
+      })
+    },
+    // 教师端公告函数
     Notice() {
       setTimeout(() => {
         this.$alert('第七题的A选项的答案更改为:<br> Welcome to the super star university examination system.', '提示', {
@@ -393,9 +413,28 @@ export default {
     },
     // 工具箱时间函数
     timeshowhs() {
-      this.timeshow = !this.timeshow
       const child = this.$refs.timeshowchild
-      child.countTime()
+      this.$prompt('当前题型：段落信息匹配', '设定时间', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        inputPlaceholder: '请输入您要设定时间(单位分钟)',
+        inputPattern: /^[0-9]*[1-9][0-9]*$/,
+        inputErrorMessage: '请输入数字!'
+      }).then(({ value }) => {
+        this.$message({
+          type: 'success',
+          message: '设定成功!'
+        })
+        child.countTime(value * 60)
+        setTimeout(() => {
+          this.timeshow = true
+        }, 1000)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入!'
+        })
+      })
     },
     getCompetence() {
       this.faceloading = true
@@ -538,7 +577,6 @@ export default {
           // 写作题
           this.viewerText = this.question.tip
           setTimeout(() => {
-            this.timeshowhs()
             if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showInput = true
@@ -568,7 +606,6 @@ export default {
           // this.answers = this.question.answers
           this.viewerText = this.question.tip
           setTimeout(() => {
-            this.timeshowhs()
             if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showBlanks = true
@@ -578,7 +615,6 @@ export default {
           // 信息匹配
           this.viewerText = this.question.tip
           setTimeout(() => {
-            this.timeshowhs()
             if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showMatch = true
@@ -588,7 +624,6 @@ export default {
           // 阅读理解
           this.viewerText = this.question.tip
           setTimeout(() => {
-            this.timeshowhs()
             if (this.timeshow === true) this.timeshow = false
             this.showTips = true
             this.showReading = true

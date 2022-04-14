@@ -2,7 +2,7 @@
   <div class="register-container">
     <article class="header-card">
       <header>
-        <el-avatar icon="el-icon-user-solid" shape="circle"/>
+        <el-avatar icon="el-icon-user-solid" shape="circle" />
         <span class="login">
           <em class="bold">已有账号？</em>
           <a href="/login">
