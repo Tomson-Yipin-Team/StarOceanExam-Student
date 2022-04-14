@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card class="box-card" :body-style="{padding:'0px'}" shadow="hover">
-      <div class="image-box">
+      <div :style="imageClass">
         <span><el-button id="in" type="text" style="float: right;padding: 0px" @click="Classdetail">进入</el-button></span>
         <div id="term">{{ classInfo.date }}</div>
         <div id="name">{{ classInfo.name }}</div>
@@ -30,8 +30,20 @@ export default {
           name: '课程名称',
           classrooms: ['班级1', '班级2'],
           code: '课程码',
-          teacher: '教师名称'
+          teacher: '教师名称',
+          url: 'url("https://lsky-picture.stdcdn.com/uploads/2022/04/eb5c30a0ce1ac0429ceb43dd6103814a.png")'
         }
+      }
+    }
+  },
+  data() {
+    return {
+      imageClass: {
+        backgroundImage: 'url("http://lsky.jujuh.top/i/2022/04/03/62497a4626769.png")',
+        height: '160px',
+        backgroundSize: 'cover',
+        padding: '30px',
+        width: ' 100%'
       }
     }
   },
@@ -56,6 +68,15 @@ export default {
     },
     Classdetail() {
       this.$router.push({ path: '/Classdetail' })
+    }
+  },
+  watch: {
+    classInfo: {
+      immediate: true,
+      deep: true,
+      handler(newValue) {
+        this.imageClass.backgroundImage = newValue.url
+      }
     }
   }
 }
