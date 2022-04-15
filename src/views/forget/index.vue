@@ -48,12 +48,12 @@
               />
             </el-col>
           </el-form-item>
-          <el-form-item label="账号" prop="pwd">
+          <el-form-item label="新密码" prop="pwd">
             <el-col :span="20">
               <el-input v-model="ruleForm.pwd" type="password" placeholder="请输入需要修改密码的账号" />
             </el-col>
           </el-form-item>
-          <el-form-item label="新密码" prop="cpwd">
+          <el-form-item label="确认密码" prop="cpwd">
             <el-col :span="20">
               <el-input v-model="ruleForm.cpwd" type="password" />
             </el-col>
